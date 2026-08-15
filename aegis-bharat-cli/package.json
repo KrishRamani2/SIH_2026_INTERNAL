@@ -1,0 +1,22 @@
+{
+  "name": "aegis-bharat-cli",
+  "version": "1.0.0",
+  "description": "Aegis-Bharat DDoS Mitigation CLI operations tool",
+  "bin": {
+    "aegis": "./bin/aegis.js"
+  },
+  "main": "bin/aegis.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node bin/aegis.js"
+  },
+  "dependencies": {
+    "boxen": "^5.1.2",
+    "chalk": "^4.1.2",
+    "cli-table3": "^0.6.3",
+    "commander": "^11.1.0",
+    "figlet": "^1.7.0",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1"
+  }
+}
