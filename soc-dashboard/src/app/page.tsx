@@ -3,12 +3,11 @@
 import { useState, useEffect } from "react";
 import {
   Shield, Monitor, Brain, BarChart2, FileCheck,
-  Wifi, RefreshCw, Maximize2, Bell, Settings,
-  AlertTriangle, Activity,
+  RefreshCw, Maximize2, Bell, Settings, AlertTriangle,
+  Activity, ChevronDown, Circle,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 
-// Lazy-load tabs (avoids SSR issues with recharts)
 const CommandCenter = dynamic(() => import("@/components/tabs/CommandCenter"), { ssr: false, loading: () => <LoadingTab /> });
 const AttackIntelligence = dynamic(() => import("@/components/tabs/AttackIntelligence"), { ssr: false, loading: () => <LoadingTab /> });
 const PredictiveTab = dynamic(() => import("@/components/tabs/PredictiveTab"), { ssr: false, loading: () => <LoadingTab /> });
@@ -17,209 +16,202 @@ const ComplianceTab = dynamic(() => import("@/components/tabs/ComplianceTab"), {
 
 function LoadingTab() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 300, color: "#475569", fontSize: "0.8rem" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 280, color: "#94A3B8", fontSize: 13 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 32, height: 32, border: "2px solid #06b6d4", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-        Initializing analytics engine...
+        <div style={{ width: 28, height: 28, border: "2px solid #2563EB", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        Loading analytics...
       </div>
     </div>
   );
 }
 
 const tabs = [
-  { id: "command", label: "Live Command Center", icon: Monitor, shortLabel: "Command" },
-  { id: "intelligence", label: "Attack Intelligence", icon: Brain, shortLabel: "Intel" },
-  { id: "predictive", label: "Predictive & Trajectory", icon: Activity, shortLabel: "Forecast" },
-  { id: "os", label: "OS & Source Analytics", icon: BarChart2, shortLabel: "OS Analytics" },
-  { id: "compliance", label: "Recovery & Compliance", icon: FileCheck, shortLabel: "Compliance" },
+  { id: "command",      label: "Command Center", icon: Monitor   },
+  { id: "intelligence", label: "Intel",          icon: Brain     },
+  { id: "predictive",   label: "Forecast",       icon: Activity  },
+  { id: "os",           label: "OS Analytics",   icon: BarChart2 },
+  { id: "compliance",   label: "Compliance",     icon: FileCheck },
 ];
 
-const STATUS_ATTACK = "attack";
-const STATUS_HEALTHY = "healthy";
-const STATUS_RECOVERING = "recovering";
-
 export default function Dashboard() {
-  const [activeTab, setActiveTab] = useState("command");
-  const [time, setTime] = useState("");
-  const [alertCount, setAlertCount] = useState(7);
-  const [status] = useState(STATUS_ATTACK);
-  const [presentationMode, setPresentationMode] = useState(false);
+  const [activeTab, setActiveTab]         = useState("command");
+  const [time, setTime]                   = useState("");
+  const [alertCount]                      = useState(7);
+  const [demoMode, setDemoMode]           = useState(false);
+  const status                            = "attack"; // "healthy" | "attack" | "recovering"
 
   useEffect(() => {
-    const update = () => {
+    const update = () =>
       setTime(new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }));
-    };
     update();
     const t = setInterval(update, 1000);
     return () => clearInterval(t);
   }, []);
 
-  const statusConfig = {
-    attack: { label: "🔴 UNDER ATTACK", color: "#ef4444", ribbonClass: "status-ribbon-attack", subtext: "DDoS Event Active — Mitigations Deployed — Confidence: 94%" },
-    healthy: { label: "🟢 ALL SYSTEMS NORMAL", color: "#10b981", ribbonClass: "status-ribbon-healthy", subtext: "No active threats — Monitoring baseline traffic" },
-    recovering: { label: "🟡 RECOVERING", color: "#f59e0b", ribbonClass: "status-ribbon-recovering", subtext: "Attack subsiding — Cleaning up rules — ETA: 28 min" },
-  }[status] ?? { label: "", color: "#06b6d4", ribbonClass: "", subtext: "" };
-
   return (
-    <div style={{ minHeight: "100vh", background: "var(--bg-base)", display: "flex", flexDirection: "column" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg-page)", display: "flex", flexDirection: "column" }}>
 
-      {/* ── Global Status Ribbon ─────────────────────────────── */}
-      <div className={statusConfig.ribbonClass} style={{ padding: "6px 20px", display: "flex", alignItems: "center", gap: 16, justifyContent: "space-between" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontWeight: 800, fontSize: "0.75rem", color: statusConfig.color, letterSpacing: "0.08em" }} className="text-glow-red">
-            {statusConfig.label}
-          </span>
-          <span style={{ fontSize: "0.65rem", color: "#94a3b8" }}>{statusConfig.subtext}</span>
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <span style={{ display: "flex", alignItems: "center", gap: 4, fontSize: "0.65rem", color: "#475569" }}>
-            <Wifi size={11} /> <span className="mono">{time}</span>
-          </span>
-          <span className="badge badge-red">
-            <AlertTriangle size={9} /> {alertCount} Alerts
-          </span>
-        </div>
-      </div>
-
-      {/* ── Header ──────────────────────────────────────────── */}
+      {/* ─── Header ─────────────────────────────────────────── */}
       <header style={{
-        padding: "12px 24px",
+        background: "#FFFFFF",
         borderBottom: "1px solid var(--border)",
-        background: "rgba(6,15,30,0.95)",
-        backdropFilter: "blur(10px)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
+        boxShadow: "var(--shadow-xs)",
         position: "sticky",
         top: 0,
-        zIndex: 100,
+        zIndex: 200,
       }}>
-        {/* Logo */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <div style={{
-            width: 36, height: 36, borderRadius: 8,
-            background: "linear-gradient(135deg, #06b6d4, #3b82f6)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            boxShadow: "0 0 16px rgba(6,182,212,0.4)",
-          }}>
-            <Shield size={20} color="white" />
+
+        {/* Top row */}
+        <div style={{ padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 56 }}>
+
+          {/* Logo */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{
+              width: 34, height: 34, borderRadius: 8,
+              background: "linear-gradient(135deg, #2563EB, #0EA5E9)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              boxShadow: "0 2px 8px rgba(37,99,235,0.25)",
+              flexShrink: 0,
+            }}>
+              <Shield size={18} color="white" strokeWidth={2.5} />
+            </div>
+            <div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
+                <span style={{ fontSize: 16, fontWeight: 700, color: "#0F172A", letterSpacing: "-0.02em" }}>ShieldSense</span>
+                <span style={{ fontSize: 11, fontWeight: 500, color: "var(--text-muted)", background: "var(--bg-subtle)", padding: "1px 6px", borderRadius: 4, border: "1px solid var(--border)" }}>SOC v2.1</span>
+              </div>
+              <div style={{ fontSize: 10, color: "var(--text-muted)", letterSpacing: "0.04em", marginTop: 1 }}>
+                Intelligent DDoS Detection &amp; Response Platform
+              </div>
+            </div>
           </div>
-          <div>
-            <div style={{ fontSize: "1rem", fontWeight: 800, letterSpacing: "-0.01em", lineHeight: 1 }}>
-              <span className="shimmer-text">ShieldSense</span>
-              <span style={{ fontSize: "0.6rem", fontWeight: 500, color: "#475569", marginLeft: 8, verticalAlign: "middle" }}>SOC v2.1</span>
-            </div>
-            <div style={{ fontSize: "0.58rem", color: "#475569", letterSpacing: "0.12em", textTransform: "uppercase", marginTop: 2 }}>
-              Intelligent DDoS Detection & Response Platform
-            </div>
+
+          {/* Tab nav — center */}
+          <nav style={{ display: "flex", alignItems: "flex-end", height: "100%", gap: 2 }}>
+            {tabs.map(tab => (
+              <button
+                key={tab.id}
+                className={`nav-tab ${activeTab === tab.id ? "active" : ""}`}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </nav>
+
+          {/* Right controls */}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            {/* Status pill */}
+            {status === "attack" && (
+              <span className="pill pill-red">
+                <span className="dot-pulse" style={{ background: "#DC2626" }} />
+                UNDER ATTACK
+              </span>
+            )}
+            {status === "healthy" && (
+              <span className="pill pill-green">
+                <span className="dot-pulse" style={{ background: "#059669" }} />
+                SYSTEMS NORMAL
+              </span>
+            )}
+
+            {/* Time controls */}
+            <button style={{
+              display: "flex", alignItems: "center", gap: 6,
+              padding: "5px 10px", borderRadius: 6,
+              border: "1px solid var(--border)",
+              background: "white",
+              fontSize: 11, fontWeight: 500, color: "var(--text-secondary)",
+              cursor: "pointer",
+            }}>
+              Last 30 Minutes <ChevronDown size={12} />
+            </button>
+
+            <button style={{
+              display: "flex", alignItems: "center", gap: 6,
+              padding: "5px 10px", borderRadius: 6,
+              border: "1px solid var(--blue)",
+              background: "var(--blue-light)",
+              fontSize: 11, fontWeight: 600, color: "var(--blue)",
+              cursor: "pointer",
+            }}>
+              Auto-refresh: 2s
+            </button>
+
+            {/* Icon buttons */}
+            {[
+              { icon: Bell, badge: alertCount > 0 },
+              { icon: Settings, badge: false },
+            ].map(({ icon: Icon, badge }, i) => (
+              <button key={i} style={{
+                position: "relative",
+                padding: 7, borderRadius: 7,
+                border: "1px solid var(--border)",
+                background: "white",
+                color: "var(--text-secondary)",
+                cursor: "pointer", display: "flex",
+              }}>
+                <Icon size={15} />
+                {badge && (
+                  <span style={{ position: "absolute", top: 4, right: 4, width: 7, height: 7, borderRadius: "50%", background: "#DC2626", border: "2px solid white" }} />
+                )}
+              </button>
+            ))}
+
+            <button
+              onClick={() => setDemoMode(d => !d)}
+              style={{
+                padding: "5px 12px", borderRadius: 6,
+                border: `1px solid ${demoMode ? "#2563EB" : "var(--border)"}`,
+                background: demoMode ? "#EFF6FF" : "white",
+                color: demoMode ? "#2563EB" : "var(--text-secondary)",
+                fontSize: 11, fontWeight: 600, cursor: "pointer",
+              }}
+            >
+              {demoMode ? "Exit Demo" : "Demo Mode"}
+            </button>
           </div>
         </div>
 
-        {/* Tab navigation */}
-        <nav style={{ display: "flex", gap: 4, alignItems: "center" }}>
-          {tabs.map(tab => (
-            <button
-              key={tab.id}
-              className={`tab-btn ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
-            >
-              <tab.icon size={12} style={{ display: "inline", marginRight: 6, verticalAlign: "middle" }} />
-              {tab.shortLabel}
-            </button>
-          ))}
-        </nav>
-
-        {/* Right controls */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <button
-            onClick={() => setPresentationMode(p => !p)}
-            style={{
-              display: "flex", alignItems: "center", gap: 6,
-              padding: "6px 12px", borderRadius: 8, border: "1px solid var(--border)",
-              background: presentationMode ? "rgba(6,182,212,0.15)" : "transparent",
-              color: presentationMode ? "#06b6d4" : "#94a3b8",
-              fontSize: "0.65rem", fontWeight: 600, cursor: "pointer", letterSpacing: "0.05em",
-              textTransform: "uppercase",
-            }}
-          >
-            <Maximize2 size={11} />
-            {presentationMode ? "EXIT DEMO" : "DEMO MODE"}
-          </button>
-          <button style={{ padding: 7, borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: "#94a3b8", cursor: "pointer", display: "flex" }}>
-            <RefreshCw size={14} />
-          </button>
-          <button style={{ padding: 7, borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: "#94a3b8", cursor: "pointer", display: "flex", position: "relative" }}>
-            <Bell size={14} />
-            {alertCount > 0 && (
-              <span style={{ position: "absolute", top: 3, right: 3, width: 7, height: 7, borderRadius: "50%", background: "#ef4444", border: "1.5px solid var(--bg-panel)" }} />
-            )}
-          </button>
-          <button style={{ padding: 7, borderRadius: 8, border: "1px solid var(--border)", background: "transparent", color: "#94a3b8", cursor: "pointer", display: "flex" }}>
-            <Settings size={14} />
+        {/* Live indicator row */}
+        <div style={{ padding: "4px 24px 0", display: "flex", alignItems: "center", gap: 12, borderTop: "1px solid var(--border)", height: 32 }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "var(--success)" }}>
+            <span className="dot-pulse" style={{ background: "#059669", width: 6, height: 6 }} />
+            Live
+          </span>
+          <span style={{ fontSize: 11, color: "var(--text-muted)" }}>Last updated: <span className="mono" style={{ color: "var(--text-secondary)" }}>{time}</span></span>
+          <button style={{ display: "flex", alignItems: "center", color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>
+            <RefreshCw size={11} />
           </button>
         </div>
       </header>
 
-      {/* ── Main content ────────────────────────────────────── */}
-      <main style={{ flex: 1, padding: presentationMode ? "12px" : "20px 24px", overflowX: "hidden" }}>
-
-        {/* Tab title row */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            {(() => {
-              const tab = tabs.find(t => t.id === activeTab);
-              if (!tab) return null;
-              return (
-                <>
-                  <tab.icon size={16} color="#06b6d4" />
-                  <h1 style={{ fontSize: "0.9rem", fontWeight: 700, color: "#e2e8f0", letterSpacing: "-0.01em" }}>{tab.label}</h1>
-                  <span style={{ fontSize: "0.6rem", color: "#475569", padding: "2px 8px", background: "#0a1628", borderRadius: 99, border: "1px solid #1a2d4a" }}>
-                    Auto-refresh: 2s
-                  </span>
-                </>
-              );
-            })()}
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <span style={{ fontSize: "0.6rem", color: "#475569" }} className="mono">
-              Last update: {time}
-            </span>
-            <span className="badge badge-green">
-              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#10b981", display: "inline-block" }} className="dot-blink" />
-              LIVE
-            </span>
-          </div>
-        </div>
-
-        {/* Active tab */}
-        {activeTab === "command" && <CommandCenter />}
+      {/* ─── Main ───────────────────────────────────────────── */}
+      <main style={{ flex: 1, padding: "20px 24px", overflowX: "hidden" }}>
+        {activeTab === "command"      && <CommandCenter />}
         {activeTab === "intelligence" && <AttackIntelligence />}
-        {activeTab === "predictive" && <PredictiveTab />}
-        {activeTab === "os" && <OSAnalyticsTab />}
-        {activeTab === "compliance" && <ComplianceTab />}
+        {activeTab === "predictive"   && <PredictiveTab />}
+        {activeTab === "os"           && <OSAnalyticsTab />}
+        {activeTab === "compliance"   && <ComplianceTab />}
       </main>
 
-      {/* ── Footer ──────────────────────────────────────────── */}
+      {/* ─── Footer ─────────────────────────────────────────── */}
       <footer style={{
         padding: "8px 24px",
         borderTop: "1px solid var(--border)",
+        background: "#FFFFFF",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        background: "rgba(6,15,30,0.8)",
-        fontSize: "0.58rem",
-        color: "#475569",
+        fontSize: 11,
+        color: "var(--text-muted)",
       }}>
         <span>ShieldSense SOC Platform · SIH 2026 · Team Quantum Defenders</span>
-        <div style={{ display: "flex", gap: 16 }}>
-          <span>Data Engine: LSTM-Transformer v3.1</span>
-          <span>WAF: ModSecurity + Custom Rules</span>
-          <span>Privacy: Differential Privacy ε=0.83</span>
-          <span className="mono" style={{ color: "#10b981" }}>● All systems operational</span>
-        </div>
+        <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#059669" }}>
+          <Circle size={7} fill="#059669" strokeWidth={0} /> All systems operational
+        </span>
       </footer>
 
-      {/* Spin animation for loader */}
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   );
