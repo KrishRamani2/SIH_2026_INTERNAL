@@ -4,11 +4,11 @@ import { AlertTriangle, Cpu, Shield, Zap, CheckCircle, Activity } from "lucide-r
 
 const EVENTS = [
   { time: "16:48:22", icon: AlertTriangle, color: "#DC2626", bg: "#FEF2F2", title: "Attack Detected", sub: "Traffic spike 340% above baseline", conf: "91%" },
-  { time: "16:48:28", icon: Cpu,           color: "#7C3AED", bg: "#F5F3FF", title: "ML Classification", sub: "SYN flood pattern matched", conf: "94%" },
-  { time: "16:48:51", icon: Shield,        color: "#D97706", bg: "#FFFBEB", title: "WAF Rule Triggered", sub: "Rule #4421 activated. Block initiated", conf: "—" },
-  { time: "16:49:02", icon: Zap,           color: "#2563EB", bg: "#EFF6FF", title: "Traffic Blocked", sub: "Adaptive traffic blocked 49.7% of total", conf: "—" },
-  { time: "16:49:18", icon: Activity,      color: "#0EA5E9", bg: "#F0F9FF", title: "Mitigation Deployed", sub: "Adaptive mitigation deployed across edge nodes", conf: "—" },
-  { time: "16:50:10", icon: CheckCircle,   color: "#059669", bg: "#ECFDF5", title: "System Stabilized", sub: "Traffic normal-izing. Monitoring continues", conf: "—" },
+  { time: "16:48:28", icon: Cpu,           color: "#D97706", bg: "#FFFBEB", title: "ML Classification", sub: "SYN flood pattern matched", conf: "94%" },
+  { time: "16:48:51", icon: Shield,        color: "#D97706", bg: "#FFFBEB", title: "WAF Rule Triggered", sub: "Rule #4421 activated", conf: "Block initiated" },
+  { time: "16:49:02", icon: Zap,           color: "#DC2626", bg: "#FEF2F2", title: "Traffic Blocked", sub: "Malicious traffic blocked", conf: "49.7% of total" },
+  { time: "16:49:18", icon: Activity,      color: "#059669", bg: "#ECFDF5", title: "Mitigation Deployed", sub: "Adaptive mitigation deployed across edge nodes", conf: "—" },
+  { time: "16:50:10", icon: CheckCircle,   color: "#2563EB", bg: "#EFF6FF", title: "System Stabilized", sub: "Traffic normalizing. Monitoring continues", conf: "—" },
 ];
 
 export default function LiveNarrative() {
@@ -30,47 +30,58 @@ export default function LiveNarrative() {
       </div>
 
       {/* Horizontal incident timeline */}
-      <div style={{ display: "flex", alignItems: "flex-start", overflowX: "auto", paddingBottom: 8 }}>
+      <div style={{ display: "flex", alignItems: "flex-start", width: "100%", paddingBottom: 8, position: "relative" }}>
         {EVENTS.map((ev, i) => {
           const Icon = ev.icon;
           const isActive = i === highlight;
           return (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", flexShrink: 0 }}>
+            <div key={i} style={{ display: "flex", alignItems: "flex-start", flex: 1 }}>
               {/* Node */}
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 140 }}>
+              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1, minWidth: 0, padding: "0 4px" }}>
                 {/* Icon circle */}
                 <div style={{
                   width: 40, height: 40, borderRadius: "50%",
                   background: ev.bg,
-                  border: `2px solid ${isActive ? ev.color : "#E2E8F0"}`,
+                  border: `2px solid ${isActive ? ev.color : "#CBD5E1"}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
-                  boxShadow: isActive ? `0 0 0 4px ${ev.color}20` : undefined,
+                  boxShadow: isActive ? `0 0 0 4px ${ev.color}25` : "0 1px 3px rgba(0,0,0,0.05)",
                   transition: "all 0.3s",
+                  zIndex: 2,
+                  flexShrink: 0,
                 }}>
                   <Icon size={18} color={ev.color} />
                 </div>
                 {/* Time */}
-                <div style={{ fontSize: 9, color: "#94A3B8", marginTop: 6, fontFamily: "monospace" }}>{ev.time}</div>
+                <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 8, fontFamily: "monospace", fontWeight: 600 }}>{ev.time}</div>
                 {/* Title */}
-                <div style={{ fontSize: 11, fontWeight: 700, color: "#0F172A", marginTop: 4, textAlign: "center", lineHeight: 1.3 }}>{ev.title}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#0F172A", marginTop: 3, textAlign: "center", lineHeight: 1.3 }}>{ev.title}</div>
                 {/* Sub */}
-                <div style={{ fontSize: 9, color: "#475569", marginTop: 3, textAlign: "center", lineHeight: 1.4, padding: "0 4px" }}>{ev.sub}</div>
-                {/* Confidence */}
+                <div style={{ fontSize: 10, color: "#475569", marginTop: 3, textAlign: "center", lineHeight: 1.3, maxWidth: 160 }}>{ev.sub}</div>
+                {/* Confidence / Status pill */}
                 {ev.conf !== "—" && (
-                  <div style={{ marginTop: 5, fontSize: 9, fontWeight: 700, color: ev.color, background: ev.bg, padding: "1px 7px", borderRadius: 99 }}>
-                    Confidence: {ev.conf}
+                  <div style={{
+                    marginTop: 6, fontSize: 9, fontWeight: 700,
+                    color: ev.color, background: ev.bg,
+                    border: `1px solid ${ev.color}30`,
+                    padding: "2px 8px", borderRadius: 99,
+                    whiteSpace: "nowrap"
+                  }}>
+                    {ev.conf.includes("%") ? `Confidence: ${ev.conf}` : ev.conf}
                   </div>
                 )}
               </div>
 
-              {/* Connector */}
+              {/* Connector between nodes */}
               {i < EVENTS.length - 1 && (
                 <div style={{
-                  height: 2, width: 32, marginTop: 19, flexShrink: 0,
+                  height: 2,
+                  flex: 1,
+                  marginTop: 19,
                   background: i < highlight
                     ? `linear-gradient(90deg, ${EVENTS[i].color}, ${EVENTS[i+1].color})`
                     : "#E2E8F0",
                   transition: "background 0.5s",
+                  alignSelf: "flex-start"
                 }} />
               )}
             </div>
@@ -80,3 +91,4 @@ export default function LiveNarrative() {
     </div>
   );
 }
+
