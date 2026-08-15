@@ -1,0 +1,318 @@
+@import "tailwindcss";
+
+/* ── Global reset & tokens ─────────────────────────────────────── */
+:root {
+  --bg-base:    #020917;
+  --bg-panel:   #060f1e;
+  --bg-card:    #0a1628;
+  --bg-hover:   #0f1f3a;
+  --border:     #1a2d4a;
+  --border-glow:#0ea5e9;
+
+  --cyan:       #06b6d4;
+  --blue:       #3b82f6;
+  --purple:     #8b5cf6;
+  --amber:      #f59e0b;
+  --red:        #ef4444;
+  --green:      #10b981;
+  --pink:       #ec4899;
+
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-muted:     #475569;
+
+  --glow-cyan:  0 0 20px rgba(6, 182, 212, 0.4);
+  --glow-red:   0 0 20px rgba(239, 68, 68, 0.5);
+  --glow-green: 0 0 20px rgba(16, 185, 129, 0.4);
+  --glow-amber: 0 0 20px rgba(245, 158, 11, 0.4);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+/* ── Panel / Card base ─────────────────────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(6,182,212,0.03) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.08);
+}
+
+/* ── Neon glow utilities ───────────────────────────────────────── */
+.glow-cyan  { box-shadow: var(--glow-cyan); }
+.glow-red   { box-shadow: var(--glow-red); }
+.glow-green { box-shadow: var(--glow-green); }
+.glow-amber { box-shadow: var(--glow-amber); }
+
+.text-glow-cyan  { text-shadow: 0 0 12px rgba(6, 182, 212, 0.8); }
+.text-glow-red   { text-shadow: 0 0 12px rgba(239, 68, 68, 0.9); }
+.text-glow-green { text-shadow: 0 0 12px rgba(16, 185, 129, 0.8); }
+.text-glow-amber { text-shadow: 0 0 12px rgba(245, 158, 11, 0.8); }
+
+/* ── Status ribbon ─────────────────────────────────────────────── */
+.status-ribbon-attack {
+  background: linear-gradient(90deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05));
+  border-bottom: 1px solid rgba(239,68,68,0.4);
+  animation: ribbon-pulse 2s ease-in-out infinite;
+}
+
+.status-ribbon-healthy {
+  background: linear-gradient(90deg, rgba(16,185,129,0.12), rgba(16,185,129,0.04));
+  border-bottom: 1px solid rgba(16,185,129,0.3);
+}
+
+.status-ribbon-recovering {
+  background: linear-gradient(90deg, rgba(245,158,11,0.12), rgba(245,158,11,0.04));
+  border-bottom: 1px solid rgba(245,158,11,0.3);
+}
+
+@keyframes ribbon-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Animated scanning line ────────────────────────────────────── */
+.scan-line {
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0%   { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ── Pulse ring for attack indicator ───────────────────────────── */
+.pulse-ring {
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 1; }
+  80%  { transform: scale(1.8); opacity: 0; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* ── Number counter animation ──────────────────────────────────── */
+.counter { font-variant-numeric: tabular-nums; }
+
+/* ── Attack dot blink ──────────────────────────────────────────── */
+.dot-blink { animation: blink 1s ease-in-out infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* ── Gradient text ─────────────────────────────────────────────── */
+.gradient-text-cyan {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-red {
+  background: linear-gradient(135deg, #ef4444, #f59e0b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Monospace font ────────────────────────────────────────────── */
+.mono { font-family: 'JetBrains Mono', 'Fira Code', monospace; }
+
+/* ── Tab nav ───────────────────────────────────────────────────── */
+.tab-btn {
+  position: relative;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+  border-color: var(--border);
+}
+
+.tab-btn.active {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: rgba(6, 182, 212, 0.4);
+  color: var(--cyan);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.15);
+}
+
+/* ── Section heading ───────────────────────────────────────────── */
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ── Badge ─────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-red    { background: rgba(239,68,68,0.15);  color: #ef4444;  border: 1px solid rgba(239,68,68,0.3);  }
+.badge-cyan   { background: rgba(6,182,212,0.15);  color: #06b6d4;  border: 1px solid rgba(6,182,212,0.3);  }
+.badge-green  { background: rgba(16,185,129,0.15); color: #10b981;  border: 1px solid rgba(16,185,129,0.3); }
+.badge-amber  { background: rgba(245,158,11,0.15); color: #f59e0b;  border: 1px solid rgba(245,158,11,0.3); }
+.badge-purple { background: rgba(139,92,246,0.15); color: #8b5cf6;  border: 1px solid rgba(139,92,246,0.3); }
+
+/* ── Gauge ─────────────────────────────────────────────────────── */
+.gauge-track {
+  fill: none;
+  stroke: var(--bg-hover);
+  stroke-width: 14;
+}
+.gauge-fill {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s ease;
+}
+
+/* ── Heatmap cell ──────────────────────────────────────────────── */
+.heatmap-cell {
+  border-radius: 3px;
+  transition: transform 0.15s;
+  cursor: pointer;
+}
+.heatmap-cell:hover { transform: scale(1.3); z-index: 10; }
+
+/* ── Narrative scroll ──────────────────────────────────────────── */
+.narrative-item {
+  border-left: 2px solid var(--border);
+  transition: border-color 0.2s;
+}
+.narrative-item:hover { border-left-color: var(--cyan); }
+
+/* ── Progress bar ──────────────────────────────────────────────── */
+.progress-bar {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--bg-hover);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s ease;
+}
+
+/* ── World map dots ────────────────────────────────────────────── */
+.attack-dot {
+  animation: attack-ping 1.5s ease-out infinite;
+}
+@keyframes attack-ping {
+  0%   { r: 3; opacity: 1; }
+  100% { r: 10; opacity: 0; }
+}
+
+/* ── Grid layout helpers ───────────────────────────────────────── */
+.grid-cols-kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+/* ── Chart tooltip override ────────────────────────────────────── */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* ── Scrollable list ───────────────────────────────────────────── */
+.scroll-list {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* ── Tagline shimmer ───────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--cyan) 0%, #fff 50%, var(--cyan) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
