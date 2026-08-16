@@ -2,231 +2,405 @@
 
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  Cell, PieChart, Pie, AreaChart, Area,
+  Cell, PieChart, Pie, AreaChart, Area, Line, ComposedChart
 } from "recharts";
-import { osFingerprintData, topTalkers, ttlHistogram } from "@/lib/mockData";
+import { Info, ArrowRight, ShieldCheck, Lock, ChevronDown } from "lucide-react";
 
-const ChartTooltip = ({ active, payload, label }: any) => {
-  if (!active || !payload?.length) return null;
-  return (
-    <div style={{ background: "#0a1628", border: "1px solid #1a2d4a", borderRadius: 8, padding: "8px 12px" }}>
-      <p style={{ color: "#94a3b8", fontSize: 11, marginBottom: 4 }}>{label}</p>
-      {payload.map((p: any, i: number) => (
-        <p key={i} style={{ color: p.color || "#e2e8f0", fontSize: 12, fontWeight: 600 }}>
-          {p.name}: {Number(p.value).toLocaleString()}
-        </p>
-      ))}
-    </div>
-  );
-};
+// ─── Data Definitions ─────────────────────────────────────────
 
-const deviceTypes = [
-  { name: "Bot/Scripted", value: 52, color: "#ef4444" },
-  { name: "Desktop Browser", value: 23, color: "#06b6d4" },
-  { name: "IoT Device", value: 14, color: "#f59e0b" },
-  { name: "Mobile", value: 7, color: "#8b5cf6" },
-  { name: "Unknown", value: 4, color: "#6b7280" },
+const ttlData = [
+  { range: "0-32",    val: 2.0,  color: "#6366F1" },
+  { range: "33-64",   val: 0.2,  color: "#6366F1" },
+  { range: "65-96",   val: 2.0,  color: "#6366F1" },
+  { range: "97-128",  val: 20.8, color: "#DC2626", label: "97 - 128 (Windows)\n20.8% of total requests" },
+  { range: "129-160", val: 0.3,  color: "#94A3B8" },
+  { range: "161-192", val: 13.5, color: "#0284C7" },
+  { range: "193-224", val: 0.1,  color: "#94A3B8" },
+  { range: "225-255", val: 3.0,  color: "#94A3B8" },
 ];
 
-const ja3Hashes = [
-  { hash: "a8d3...b2f1", count: 4820, label: "Mirai variant" },
-  { hash: "c7e9...a4d2", count: 3140, label: "Generic bot" },
-  { hash: "f2a1...9b3e", count: 2890, label: "Curl/libcurl" },
-  { hash: "9d4c...1e8f", count: 1940, label: "Python requests" },
-  { hash: "b3f8...7c2a", count: 1560, label: "Go http" },
-  { hash: "2e6d...4a9c", count: 1120, label: "PHP fsockopen" },
-  { hash: "e1a4...d5f3", count: 890, label: "Custom scanner" },
+const deviceBreakdown = [
+  { name: "Desktop / Browser", pct: "52%", count: "66,891", val: 52, color: "#2563EB" },
+  { name: "Windows Systems",   pct: "28%", count: "35,988", val: 28, color: "#DC2626" },
+  { name: "Linux / Unix",      pct: "11%", count: "14,152", val: 11, color: "#6366F1" },
+  { name: "Mobile Devices",    pct: "6%",  count: "7,753",  val: 6,  color: "#64748B" },
+  { name: "Unknown / Other",   pct: "3%",  count: "3,758",  val: 3,  color: "#D97706" },
 ];
 
-const tcpOptions = [
-  { option: "MSS", linux: 4200, windows: 2800, iot: 1100 },
-  { option: "WSCALE", linux: 3800, windows: 2400, iot: 400 },
-  { option: "TIMESTAMP", linux: 4100, windows: 1200, iot: 200 },
-  { option: "SACK", linux: 3600, windows: 2600, iot: 800 },
-  { option: "NOP", linux: 4000, windows: 2200, iot: 950 },
+const ja3Table = [
+  { hash: "a48d...1f3e1", req: "6,501", pct: "9.21%", risk: "High",   bg: "#FEF2F2", text: "#DC2626" },
+  { hash: "c1b2...d8f4",  req: "5,142", pct: "7.28%", risk: "Medium", bg: "#FFFBEB", text: "#D97706" },
+  { hash: "f3a9...e2b3",  req: "3,054", pct: "4.33%", risk: "Medium", bg: "#FFFBEB", text: "#D97706" },
+  { hash: "98b1...7ce1",  req: "2,349", pct: "3.33%", risk: "Medium", bg: "#FFFBEB", text: "#D97706" },
+  { hash: "b23c...7a6b",  req: "2,164", pct: "3.07%", risk: "Low",    bg: "#ECFDF5", text: "#059669" },
+  { hash: "d1e9...ef27",  req: "1,821", pct: "2.58%", risk: "Low",    bg: "#ECFDF5", text: "#059669" },
 ];
 
-const returningVsNew = Array.from({ length: 14 }, (_, i) => ({
-  day: `Aug ${i + 1}`,
-  returning: Math.round(2000 + Math.random() * 1500),
-  new: Math.round(5000 + Math.random() * 4000),
-}));
+const tcpStackedData = [
+  { opt: "MSS",       linux: 35, windows: 40, iot: 25 },
+  { opt: "WSCALE",    linux: 33, windows: 38, iot: 29 },
+  { opt: "TIMESTAMP", linux: 30, windows: 31, iot: 39 },
+  { opt: "SACK",      linux: 33, windows: 38, iot: 29 },
+  { opt: "NOP",       linux: 34, windows: 37, iot: 29 },
+];
+
+const attackerTrendData = [
+  { date: "Aug 1",  returning: 6.1, newAtk: 2.6 },
+  { date: "Aug 3",  returning: 6.8, newAtk: 2.9 },
+  { date: "Aug 5",  returning: 8.7, newAtk: 3.4 },
+  { date: "Aug 7",  returning: 5.6, newAtk: 2.5 },
+  { date: "Aug 9",  returning: 6.2, newAtk: 2.8 },
+  { date: "Aug 11", returning: 5.4, newAtk: 2.3 },
+  { date: "Aug 13", returning: 7.0, newAtk: 3.1 },
+  { date: "Aug 14", returning: 7.8, newAtk: 3.6 },
+];
 
 export default function OSAnalyticsTab() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
-      {/* Row 1: TTL Histogram + Device Types */}
-      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 16 }}>
-        {/* TTL Histogram */}
-        <div className="panel" style={{ padding: 20 }}>
-          <div className="section-title" style={{ marginBottom: 14 }}>TTL Distribution Histogram</div>
-          <p style={{ fontSize: "0.65rem", color: "#475569", marginBottom: 12 }}>
-            TTL=64 peak → Linux/Android devices. TTL=128 → Windows. TTL=255 → Cisco/networking equipment.
-          </p>
-          <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={ttlHistogram} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1a2d4a" />
-              <XAxis dataKey="ttl" tick={{ fill: "#475569", fontSize: 11 }} tickLine={false} axisLine={false} label={{ value: "TTL Value", fill: "#475569", fontSize: 10, position: "insideBottom", offset: -4 }} />
-              <YAxis tick={{ fill: "#475569", fontSize: 10 }} tickLine={false} axisLine={false} tickFormatter={v => `${(v/1000).toFixed(0)}k`} />
-              <Tooltip content={<ChartTooltip />} />
-              {ttlHistogram.map((d, i) => (
-                <Bar
-                  key={i}
-                  dataKey="count"
-                  data={[d]}
-                  fill={d.ttl === "64" ? "#ef4444" : d.ttl === "128" ? "#06b6d4" : "#8b5cf6"}
-                  radius={[4, 4, 0, 0]}
-                  name="Packet Count"
-                />
-              ))}
-              <Bar dataKey="count" name="Packet Count" radius={[4, 4, 0, 0]}>
-                {ttlHistogram.map((d, i) => (
-                  <Cell key={i} fill={d.ttl === "64" ? "#ef4444" : d.ttl === "128" ? "#06b6d4" : d.ttl === "128" ? "#06b6d4" : "#8b5cf6"} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+      {/* ─── Row 1: TTL Distribution Histogram + Device Type Breakdown ─── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr", gap: 16 }}>
 
-        {/* Device Type + JA3 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div className="panel" style={{ padding: 16, flex: 1 }}>
-            <div className="section-title" style={{ marginBottom: 10 }}>Device Type Breakdown</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <ResponsiveContainer width={90} height={90}>
-                <PieChart>
-                  <Pie data={deviceTypes} dataKey="value" cx="50%" cy="50%" outerRadius={40} innerRadius={20} strokeWidth={0}>
-                    {deviceTypes.map((d, i) => <Cell key={i} fill={d.color} />)}
-                  </Pie>
-                </PieChart>
-              </ResponsiveContainer>
-              <div style={{ flex: 1 }}>
-                {deviceTypes.map(d => (
-                  <div key={d.name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 5 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                      <span style={{ width: 6, height: 6, borderRadius: "50%", background: d.color, display: "inline-block" }} />
-                      <span style={{ fontSize: "0.65rem", color: "#94a3b8" }}>{d.name}</span>
-                    </div>
-                    <span className="mono" style={{ fontSize: "0.65rem", color: d.color }}>{d.value}%</span>
-                  </div>
-                ))}
+        {/* Card 1: TTL Distribution Histogram */}
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+            <div>
+              <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
+                TTL Distribution Histogram <Info size={13} color="#94A3B8" />
+              </div>
+              <div style={{ fontSize: 11, color: "#64748B", marginTop: 2 }}>
+                TTL values distribution across different device types
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      {/* Row 2: JA3 table + TCP Options */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 16 }}>
-        {/* JA3 Hash Cloud */}
-        <div className="panel" style={{ padding: 20 }}>
-          <div className="section-title" style={{ marginBottom: 14 }}>JA3/JA4 Hash Frequency</div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-            {ja3Hashes.map((h, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <span className="mono" style={{ fontSize: "0.65rem", color: "#06b6d4", width: 90, flexShrink: 0 }}>{h.hash}</span>
-                <div className="progress-bar" style={{ flex: 1 }}>
-                  <div className="progress-fill" style={{ width: `${(h.count / 4820) * 100}%`, background: `linear-gradient(90deg, #8b5cf6, #06b6d4)` }} />
-                </div>
-                <span className="mono" style={{ fontSize: "0.65rem", color: "#94a3b8", width: 40, textAlign: "right" }}>{h.count.toLocaleString()}</span>
-                <span style={{ fontSize: "0.6rem", color: "#475569", width: 80, flexShrink: 0 }}>{h.label}</span>
+          {/* Legend */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, fontSize: 10, color: "#475569", marginBottom: 12 }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#6366F1", display: "inline-block" }} />
+              TTL ≤ 64 (Likely Linux/Unix)
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#DC2626", display: "inline-block" }} />
+              64 &lt; TTL ≤ 128 (Windows Threat)
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#0284C7", display: "inline-block" }} />
+              128 &lt; TTL ≤ 255 (Network/Infra)
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#94A3B8", display: "inline-block" }} />
+              Others / Unclassified
+            </span>
+          </div>
+
+          {/* Bar Chart */}
+          <div style={{ position: "relative" }}>
+            {/* Windows Annotation Badge */}
+            <div style={{
+              position: "absolute", top: "10%", left: "41%",
+              background: "white", border: "1px solid #E2E8F0", borderRadius: 6,
+              padding: "4px 8px", boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
+              fontSize: 10, zIndex: 10, textAlign: "center"
+            }}>
+              <div style={{ fontWeight: 700, color: "#0F172A" }}>97 - 128 (Windows)</div>
+              <div style={{ color: "#475569", fontWeight: 600 }}>20.8% of total requests</div>
+            </div>
+
+            <ResponsiveContainer width="100%" height={170}>
+              <BarChart data={ttlData} margin={{ top: 15, right: 10, left: -20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="0" stroke="#F1F5F9" />
+                <XAxis dataKey="range" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} label={{ value: "TTL Value (Range)", fill: "#94A3B8", fontSize: 10, position: "insideBottom", offset: -5 }} />
+                <YAxis domain={[0, 25]} tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}%`} />
+                <Tooltip content={({ active, payload }) => {
+                  if (!active || !payload?.length) return null;
+                  return (
+                    <div className="chart-tooltip">
+                      <div style={{ fontWeight: 600, color: "#0F172A" }}>Range: {payload[0].payload.range}</div>
+                      <div style={{ fontSize: 11, color: payload[0].payload.color }}>Share: <b>{payload[0].value}%</b></div>
+                    </div>
+                  );
+                }} />
+                <Bar dataKey="val" radius={[4, 4, 0, 0]} barSize={28}>
+                  {ttlData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+
+          {/* Bottom Info Banner */}
+          <div style={{
+            marginTop: 10, padding: "8px 12px", borderRadius: 8,
+            background: "#F0F9FF", border: "1px solid #BAE6FD",
+            display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#0369A1", fontWeight: 500
+          }}>
+            <Info size={15} color="#0284C7" />
+            <span>Most requests (20.8%) have TTL in the 97-128 range, typically associated with Windows systems.</span>
+          </div>
+        </div>
+
+        {/* Card 2: Device Type Breakdown */}
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 16 }}>
+            Device Type Breakdown <Info size={13} color="#94A3B8" />
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+            {/* Donut Chart */}
+            <div style={{ position: "relative", width: 150, height: 150, flexShrink: 0 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={deviceBreakdown}
+                    dataKey="val"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={48}
+                    outerRadius={72}
+                    paddingAngle={2}
+                    strokeWidth={0}
+                  >
+                    {deviceBreakdown.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              {/* Donut Center */}
+              <div style={{
+                position: "absolute", top: 0, left: 0, right: 0, bottom: 0,
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                pointerEvents: "none"
+              }}>
+                <div style={{ fontSize: 9, color: "#64748B", fontWeight: 600 }}>Total Requests</div>
+                <div style={{ fontSize: 16, fontWeight: 800, color: "#0F172A" }}>128,542</div>
               </div>
-            ))}
+            </div>
+
+            {/* Legend List */}
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: 9, color: "#94A3B8", fontWeight: 700, borderBottom: "1px solid #F1F5F9", paddingBottom: 4 }}>
+                <span>Device Type</span>
+                <span style={{ display: "flex", gap: 20 }}>
+                  <span>% of Total</span>
+                  <span style={{ width: 45, textAlign: "right" }}>Requests</span>
+                </span>
+              </div>
+
+              {deviceBreakdown.map((item) => (
+                <div key={item.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                    <span style={{ width: 7, height: 7, borderRadius: "50%", background: item.color, display: "inline-block" }} />
+                    <span style={{ fontSize: 11, color: "#334155", fontWeight: 500 }}>{item.name}</span>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+                    <span style={{ fontSize: 11, fontWeight: 700, color: "#0F172A" }}>{item.pct}</span>
+                    <span style={{ fontSize: 10, color: "#94A3B8", width: 45, textAlign: "right", fontFamily: "monospace" }}>{item.count}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Green Info Banner */}
+          <div style={{
+            marginTop: 18, padding: "8px 12px", borderRadius: 8,
+            background: "#ECFDF5", border: "1px solid #A7F3D0",
+            display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#047857", fontWeight: 500
+          }}>
+            <ShieldCheck size={15} color="#059669" />
+            <span>Desktop/Browser traffic dominates the network with 52% of total requests.</span>
           </div>
         </div>
 
-        {/* TCP Options Stacked Bar */}
-        <div className="panel" style={{ padding: 20 }}>
-          <div className="section-title" style={{ marginBottom: 14 }}>TCP Options Frequency by OS</div>
-          <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={tcpOptions} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1a2d4a" />
-              <XAxis dataKey="option" tick={{ fill: "#475569", fontSize: 11 }} tickLine={false} axisLine={false} />
-              <YAxis tick={{ fill: "#475569", fontSize: 10 }} tickLine={false} axisLine={false} tickFormatter={v => `${(v/1000).toFixed(0)}k`} />
-              <Tooltip content={<ChartTooltip />} />
-              <Bar dataKey="linux" stackId="a" fill="#ef4444" name="Linux" />
-              <Bar dataKey="windows" stackId="a" fill="#06b6d4" name="Windows" />
-              <Bar dataKey="iot" stackId="a" fill="#f59e0b" name="IoT" radius={[4, 4, 0, 0]} name="IoT" />
-            </BarChart>
-          </ResponsiveContainer>
-          <div style={{ display: "flex", gap: 12, marginTop: 6 }}>
-            {[["Linux", "#ef4444"], ["Windows", "#06b6d4"], ["IoT", "#f59e0b"]].map(([l, c]) => (
-              <span key={l} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: "0.6rem", color: "#94a3b8" }}>
-                <span style={{ width: 8, height: 8, borderRadius: 2, background: c, display: "inline-block" }} />{l}
-              </span>
-            ))}
+      </div>
+
+      {/* ─── Row 2: JA3/JA4 Hash Frequency + TCP Options Frequency ─── */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: 16 }}>
+
+        {/* Card 3: JA3/JA4 Hash Frequency */}
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 14 }}>
+            JA3/JA4 Hash Frequency <Info size={13} color="#94A3B8" />
           </div>
-        </div>
-      </div>
 
-      {/* Row 3: Returning vs New attackers */}
-      <div className="panel" style={{ padding: 20 }}>
-        <div className="section-title" style={{ marginBottom: 14 }}>Returning vs New Attackers (14-Day Trend)</div>
-        <ResponsiveContainer width="100%" height={160}>
-          <AreaChart data={returningVsNew} margin={{ top: 5, right: 5, left: 0, bottom: 5 }}>
-            <defs>
-              <linearGradient id="newGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#ef4444" stopOpacity={0} />
-              </linearGradient>
-              <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#f59e0b" stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1a2d4a" />
-            <XAxis dataKey="day" tick={{ fill: "#475569", fontSize: 10 }} tickLine={false} axisLine={false} interval={2} />
-            <YAxis tick={{ fill: "#475569", fontSize: 10 }} tickLine={false} axisLine={false} tickFormatter={v => `${(v/1000).toFixed(0)}k`} />
-            <Tooltip content={<ChartTooltip />} />
-            <Area type="monotone" dataKey="new" stroke="#ef4444" fill="url(#newGrad)" strokeWidth={2} name="New Attackers" dot={false} />
-            <Area type="monotone" dataKey="returning" stroke="#f59e0b" fill="url(#retGrad)" strokeWidth={2} name="Returning Attackers" dot={false} />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-
-      {/* OS Comparison Table */}
-      <div className="panel" style={{ padding: 20 }}>
-        <div className="section-title" style={{ marginBottom: 14 }}>OS Family Comparison Table</div>
-        <div style={{ overflowX: "auto" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.72rem" }}>
+          {/* Ranked Table */}
+          <table style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
-              <tr style={{ borderBottom: "1px solid #1a2d4a" }}>
-                {["OS Family", "Requests", "% Share", "Avg TTL", "JA3 Similarity", "Block Rate", "Risk Level"].map(h => (
-                  <th key={h} style={{ padding: "8px 12px", textAlign: "left", color: "#475569", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", fontSize: "0.6rem" }}>{h}</th>
-                ))}
+              <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+                <th style={{ textAlign: "left", fontSize: 9, color: "#94A3B8", fontWeight: 700, paddingBottom: 6 }}>JA3/JA4 HASH</th>
+                <th style={{ textAlign: "right", fontSize: 9, color: "#94A3B8", fontWeight: 700, paddingBottom: 6 }}>REQUESTS</th>
+                <th style={{ textAlign: "right", fontSize: 9, color: "#94A3B8", fontWeight: 700, paddingBottom: 6 }}>% OF TOTAL</th>
+                <th style={{ textAlign: "right", fontSize: 9, color: "#94A3B8", fontWeight: 700, paddingBottom: 6 }}>RISK LEVEL</th>
               </tr>
             </thead>
             <tbody>
-              {[
-                { os: "Linux-Mirai", req: "18,420", pct: "42%", ttl: "64", ja3: "94%", block: "96.4%", risk: "critical", color: "#ef4444" },
-                { os: "Windows", req: "12,340", pct: "28%", ttl: "128", ja3: "71%", block: "89.2%", risk: "high", color: "#f59e0b" },
-                { os: "Unknown", req: "6,580", pct: "15%", ttl: "Varies", ja3: "32%", block: "72.1%", risk: "medium", color: "#8b5cf6" },
-                { os: "IoT", req: "3,950", pct: "9%", ttl: "64", ja3: "88%", block: "95.8%", risk: "high", color: "#f59e0b" },
-                { os: "Mobile", req: "1,760", pct: "4%", ttl: "64", ja3: "41%", block: "55.0%", risk: "low", color: "#10b981" },
-                { os: "macOS", req: "880", pct: "2%", ttl: "64", ja3: "28%", block: "40.2%", risk: "low", color: "#10b981" },
-              ].map((row, i) => (
-                <tr key={i} style={{ borderBottom: "1px solid #1a2d4a", transition: "background 0.2s" }}
-                  onMouseEnter={e => (e.currentTarget.style.background = "#0a1628")}
-                  onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
-                  <td style={{ padding: "8px 12px", display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: row.color, display: "inline-block" }} />
-                    <span style={{ color: "#e2e8f0", fontWeight: 600 }}>{row.os}</span>
-                  </td>
-                  <td style={{ padding: "8px 12px" }} className="mono"><span style={{ color: "#94a3b8" }}>{row.req}</span></td>
-                  <td style={{ padding: "8px 12px" }}><span style={{ color: row.color, fontWeight: 700 }}>{row.pct}</span></td>
-                  <td style={{ padding: "8px 12px" }} className="mono"><span style={{ color: "#94a3b8" }}>{row.ttl}</span></td>
-                  <td style={{ padding: "8px 12px" }} className="mono"><span style={{ color: "#06b6d4" }}>{row.ja3}</span></td>
-                  <td style={{ padding: "8px 12px" }} className="mono"><span style={{ color: "#10b981" }}>{row.block}</span></td>
-                  <td style={{ padding: "8px 12px" }}>
-                    <span className={`badge badge-${row.risk === "critical" ? "red" : row.risk === "high" ? "amber" : row.risk === "medium" ? "purple" : "green"}`}>{row.risk}</span>
+              {ja3Table.map((row, idx) => (
+                <tr key={idx} style={{ borderBottom: "1px solid #F8FAFC" }}>
+                  <td style={{ padding: "7px 0", fontSize: 11, fontWeight: 600, color: "#2563EB", fontFamily: "monospace" }}>{row.hash}</td>
+                  <td style={{ padding: "7px 0", fontSize: 11, color: "#475569", textAlign: "right", fontFamily: "monospace" }}>{row.req}</td>
+                  <td style={{ padding: "7px 0", fontSize: 11, color: "#334155", textAlign: "right", fontWeight: 500 }}>{row.pct}</td>
+                  <td style={{ padding: "7px 0", textAlign: "right" }}>
+                    <span style={{
+                      fontSize: 9, fontWeight: 700, color: row.text, background: row.bg,
+                      padding: "2px 8px", borderRadius: 4, display: "inline-block"
+                    }}>
+                      {row.risk}
+                    </span>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+
+          <button style={{
+            marginTop: 12, width: "100%", padding: "7px 0", borderRadius: 6, border: "none",
+            background: "#EFF6FF", color: "#2563EB", fontSize: 11, fontWeight: 600,
+            cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 6
+          }}>
+            View All Hashes <ArrowRight size={12} />
+          </button>
+        </div>
+
+        {/* Card 4: TCP Options Frequency by OS */}
+        <div className="card" style={{ padding: "18px 20px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 14 }}>
+            TCP Options Frequency by OS <Info size={13} color="#94A3B8" />
+          </div>
+
+          <ResponsiveContainer width="100%" height={180}>
+            <BarChart data={tcpStackedData} margin={{ top: 10, right: 10, left: -20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="0" stroke="#F1F5F9" />
+              <XAxis dataKey="opt" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
+              <YAxis domain={[0, 100]} tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}%`} />
+              <Tooltip content={({ active, payload }) => {
+                if (!active || !payload?.length) return null;
+                return (
+                  <div className="chart-tooltip">
+                    <div style={{ fontWeight: 600, color: "#0F172A" }}>{payload[0].payload.opt}</div>
+                    {payload.map((p: any) => (
+                      <div key={p.name} style={{ fontSize: 11, color: p.color }}>{p.name}: <b>{p.value}%</b></div>
+                    ))}
+                  </div>
+                );
+              }} />
+              <Bar dataKey="linux" stackId="a" fill="#EF4444" name="Linux / Unix" barSize={34} />
+              <Bar dataKey="windows" stackId="a" fill="#06B6D4" name="Windows" />
+              <Bar dataKey="iot" stackId="a" fill="#F59E0B" name="IoT / Network" radius={[4, 4, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+
+          {/* Legend */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 16, fontSize: 10, color: "#475569", marginTop: 4 }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#EF4444", display: "inline-block" }} />
+              Linux / Unix
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#06B6D4", display: "inline-block" }} />
+              Windows
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#F59E0B", display: "inline-block" }} />
+              IoT / Network
+            </span>
+          </div>
+
+          {/* Bottom Info Banner */}
+          <div style={{
+            marginTop: 10, padding: "8px 12px", borderRadius: 8,
+            background: "#F0F9FF", border: "1px solid #BAE6FD",
+            display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#0369A1", fontWeight: 500
+          }}>
+            <Lock size={15} color="#0284C7" />
+            <span>MSS and NOP options are most frequently used across all operating systems.</span>
+          </div>
+        </div>
+
+      </div>
+
+      {/* ─── Card 5: Returning vs New Attackers (14-Day Trend) ─── */}
+      <div className="card" style={{ padding: "18px 20px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 14 }}>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 13, fontWeight: 600, color: "#0F172A" }}>
+              Returning vs New Attackers (14-Day Trend) <Info size={13} color="#94A3B8" />
+            </div>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+            {/* Legend */}
+            <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 10, color: "#475569" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#EF4444", display: "inline-block" }} />
+                Returning Attackers
+              </span>
+              <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#F59E0B", display: "inline-block" }} />
+                New Attackers
+              </span>
+            </div>
+
+            <button style={{
+              display: "flex", alignItems: "center", gap: 6,
+              padding: "5px 10px", borderRadius: 6,
+              border: "1px solid #E2E8F0", background: "white",
+              fontSize: 11, fontWeight: 500, color: "#475569", cursor: "pointer",
+            }}>
+              Last 14 Days <ChevronDown size={12} />
+            </button>
+          </div>
+        </div>
+
+        {/* Trend Area Chart with Callout Badges */}
+        <ResponsiveContainer width="100%" height={220}>
+          <ComposedChart data={attackerTrendData} margin={{ top: 25, right: 10, left: -20, bottom: 5 }}>
+            <defs>
+              <linearGradient id="retGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#EF4444" stopOpacity={0.15} />
+                <stop offset="95%" stopColor="#EF4444" stopOpacity={0} />
+              </linearGradient>
+              <linearGradient id="newGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor="#F59E0B" stopOpacity={0.1} />
+                <stop offset="95%" stopColor="#F59E0B" stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="0" stroke="#F1F5F9" />
+            <XAxis dataKey="date" tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} />
+            <YAxis domain={[0, 10]} tick={{ fill: "#94A3B8", fontSize: 10 }} axisLine={false} tickLine={false} tickFormatter={v => `${v}%`} />
+            <Tooltip content={({ active, payload, label }) => {
+              if (!active || !payload?.length) return null;
+              return (
+                <div className="chart-tooltip">
+                  <div style={{ fontWeight: 600, color: "#0F172A" }}>{label}</div>
+                  <div style={{ fontSize: 11, color: "#EF4444" }}>Returning: <b>{payload[0].value}%</b></div>
+                  {payload[1] && <div style={{ fontSize: 11, color: "#F59E0B" }}>New: <b>{payload[1].value}%</b></div>}
+                </div>
+              );
+            }} />
+
+            {/* Returning Area (Red) */}
+            <Area type="monotone" dataKey="returning" stroke="#EF4444" strokeWidth={2} fill="url(#retGrad)" name="Returning Attackers" dot={{ fill: "#EF4444", r: 4 }} />
+
+            {/* New Line (Orange) */}
+            <Line type="monotone" dataKey="newAtk" stroke="#F59E0B" strokeWidth={2} dot={{ fill: "#F59E0B", r: 3 }} name="New Attackers" />
+          </ComposedChart>
+        </ResponsiveContainer>
+
+        {/* Bottom Info Banner */}
+        <div style={{
+          marginTop: 10, padding: "8px 12px", borderRadius: 8,
+          background: "#F0F9FF", border: "1px solid #BAE6FD",
+          display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#0369A1", fontWeight: 500
+        }}>
+          <Info size={15} color="#0284C7" />
+          <span>Returning attackers have increased by 24.3% compared to the previous 14-day period.</span>
         </div>
       </div>
+
     </div>
   );
 }

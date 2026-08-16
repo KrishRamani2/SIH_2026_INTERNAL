@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "ShieldSense SOC | Intelligent DDoS Detection Platform — SIH 2026",
-  description: "Real-time DDoS detection & response platform with ML-powered OS fingerprinting, traffic forecasting, and automated mitigation. SIH 2026.",
+  title: "Aegis-Bharat SOC | Sovereign Cyber Defense & CERT-In Compliance Platform — SIH 2026",
+  description: "Real-time DDoS detection, attack logs telemetry, CERT-In statutory compliance reporting, ML-powered OS fingerprinting & traffic forecasting. SIH 2026.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body>{children}</body>
     </html>
   );

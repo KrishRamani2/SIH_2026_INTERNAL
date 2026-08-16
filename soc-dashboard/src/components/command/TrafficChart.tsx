@@ -43,7 +43,6 @@ export default function TrafficChart({ data }: { data: ReturnType<typeof generat
               <span key={l.label} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#475569" }}>
                 <span style={{
                   width: 20, height: 2,
-                  background: l.area ? `linear-gradient(90deg,${l.color}88,${l.color}22)` : l.color,
                   display: "inline-block", borderRadius: 1,
                   borderTop: l.dashed ? `2px dashed ${l.color}` : undefined,
                   background: l.dashed ? "transparent" : l.area ? `linear-gradient(90deg,${l.color}88,${l.color}22)` : l.color,

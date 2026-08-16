@@ -13,12 +13,12 @@ import {
 // ─── Data Definitions ─────────────────────────────────────────
 
 const osCompositionData = [
-  { name: "Linux-Mirai", pct: "42.1%", count: "54,128", value: 42.1, color: "#EF4444" },
+  { name: "Linux-Mirai", pct: "42.1%", count: "54,128", value: 42.1, color: "#DC2626" },
   { name: "Windows",     pct: "28.3%", count: "36,361", value: 28.3, color: "#2563EB" },
-  { name: "Unknown",     pct: "14.7%", count: "18,932", value: 14.7, color: "#94A3B8" },
-  { name: "IoT",         pct: "9.2%",  count: "11,815", value: 9.2,  color: "#F59E0B" },
-  { name: "Mobile",      pct: "3.6%",  count: "4,617",  value: 3.6,  color: "#8B5CF6" },
-  { name: "macOS",       pct: "2.1%",  count: "2,689",  value: 2.1,  color: "#10B981" },
+  { name: "Unknown",     pct: "14.7%", count: "18,932", value: 14.7, color: "#64748B" },
+  { name: "IoT",         pct: "9.2%",  count: "11,815", value: 9.2,  color: "#D97706" },
+  { name: "Mobile",      pct: "3.6%",  count: "4,617",  value: 3.6,  color: "#6366F1" },
+  { name: "macOS",       pct: "2.1%",  count: "2,689",  value: 2.1,  color: "#94A3B8" },
 ];
 
 const radarData = [
@@ -31,32 +31,32 @@ const radarData = [
 ];
 
 const scatterData = [
-  // IoT (Orange) - low rate, mid/low entropy
-  { x: 15, y: 5.5, z: 80, os: "IoT", color: "#F59E0B" },
-  { x: 22, y: 4.8, z: 90, os: "IoT", color: "#F59E0B" },
-  { x: 18, y: 7.2, z: 70, os: "IoT", color: "#F59E0B" },
-  { x: 35, y: 6.0, z: 100, os: "IoT", color: "#F59E0B" },
-  { x: 45, y: 1.2, z: 110, os: "IoT", color: "#F59E0B" },
-  { x: 28, y: 0.8, z: 65, os: "IoT", color: "#F59E0B" },
+  // IoT (Amber) - low rate, mid/low entropy
+  { x: 15, y: 5.5, z: 80, os: "IoT", color: "#D97706" },
+  { x: 22, y: 4.8, z: 90, os: "IoT", color: "#D97706" },
+  { x: 18, y: 7.2, z: 70, os: "IoT", color: "#D97706" },
+  { x: 35, y: 6.0, z: 100, os: "IoT", color: "#D97706" },
+  { x: 45, y: 1.2, z: 110, os: "IoT", color: "#D97706" },
+  { x: 28, y: 0.8, z: 65, os: "IoT", color: "#D97706" },
 
-  // Linux-Mirai (Red) - high rate, mid entropy
-  { x: 450, y: 5.2, z: 220, os: "Linux-Mirai", color: "#EF4444" },
-  { x: 600, y: 4.8, z: 250, os: "Linux-Mirai", color: "#EF4444" },
-  { x: 800, y: 5.0, z: 300, os: "Linux-Mirai", color: "#EF4444" },
-  { x: 1200, y: 2.5, z: 280, os: "Linux-Mirai", color: "#EF4444" },
-  { x: 1500, y: 2.2, z: 310, os: "Linux-Mirai", color: "#EF4444" },
-  { x: 2200, y: 1.8, z: 260, os: "Linux-Mirai", color: "#EF4444" },
+  // Linux-Mirai (Crimson Red) - high rate, threat cluster
+  { x: 450, y: 5.2, z: 220, os: "Linux-Mirai", color: "#DC2626" },
+  { x: 600, y: 4.8, z: 250, os: "Linux-Mirai", color: "#DC2626" },
+  { x: 800, y: 5.0, z: 300, os: "Linux-Mirai", color: "#DC2626" },
+  { x: 1200, y: 2.5, z: 280, os: "Linux-Mirai", color: "#DC2626" },
+  { x: 1500, y: 2.2, z: 310, os: "Linux-Mirai", color: "#DC2626" },
+  { x: 2200, y: 1.8, z: 260, os: "Linux-Mirai", color: "#DC2626" },
 
-  // Mobile (Purple) - low/mid rate, mid entropy
-  { x: 120, y: 6.8, z: 120, os: "Mobile", color: "#8B5CF6" },
-  { x: 180, y: 7.1, z: 140, os: "Mobile", color: "#8B5CF6" },
-  { x: 220, y: 6.5, z: 130, os: "Mobile", color: "#8B5CF6" },
-  { x: 150, y: 3.2, z: 110, os: "Mobile", color: "#8B5CF6" },
+  // Mobile (Indigo) - low/mid rate, mid entropy
+  { x: 120, y: 6.8, z: 120, os: "Mobile", color: "#6366F1" },
+  { x: 180, y: 7.1, z: 140, os: "Mobile", color: "#6366F1" },
+  { x: 220, y: 6.5, z: 130, os: "Mobile", color: "#6366F1" },
+  { x: 150, y: 3.2, z: 110, os: "Mobile", color: "#6366F1" },
 
-  // Unknown (Gray) - low/mid rate, varied entropy
-  { x: 160, y: 2.4, z: 95, os: "Unknown", color: "#94A3B8" },
-  { x: 200, y: 4.2, z: 105, os: "Unknown", color: "#94A3B8" },
-  { x: 240, y: 3.0, z: 115, os: "Unknown", color: "#94A3B8" },
+  // Unknown (Slate) - low/mid rate, varied entropy
+  { x: 160, y: 2.4, z: 95, os: "Unknown", color: "#64748B" },
+  { x: 200, y: 4.2, z: 105, os: "Unknown", color: "#64748B" },
+  { x: 240, y: 3.0, z: 115, os: "Unknown", color: "#64748B" },
 
   // Windows (Blue) - high rate, high/mid entropy
   { x: 3500, y: 6.8, z: 280, os: "Windows", color: "#2563EB" },
@@ -67,9 +67,9 @@ const scatterData = [
   { x: 18000, y: 2.8, z: 300, os: "Windows", color: "#2563EB" },
   { x: 25000, y: 3.8, z: 310, os: "Windows", color: "#2563EB" },
 
-  // macOS (Green) - high rate, low entropy
-  { x: 15000, y: 1.2, z: 120, os: "macOS", color: "#10B981" },
-  { x: 22000, y: 1.5, z: 140, os: "macOS", color: "#10B981" },
+  // macOS (Cool Slate) - high rate, low entropy
+  { x: 15000, y: 1.2, z: 120, os: "macOS", color: "#94A3B8" },
+  { x: 22000, y: 1.5, z: 140, os: "macOS", color: "#94A3B8" },
 ];
 
 // Anomaly heatmap grid data generator
@@ -266,98 +266,98 @@ export default function AttackIntelligence() {
           {/* Treemap visual grid */}
           <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gridTemplateRows: "110px 95px", gap: 8 }}>
 
-            {/* AS4134 China Telecom */}
+            {/* AS4134 China Telecom - High Threat Vector */}
             <div style={{
               gridRow: "1 / 3", gridColumn: "1",
-              background: "linear-gradient(135deg, #F87171, #EF4444)",
+              background: "linear-gradient(135deg, #DC2626, #B91C1C)",
               borderRadius: 8, padding: 12, color: "white",
               display: "flex", flexDirection: "column", justifyContent: "space-between",
-              boxShadow: "0 2px 4px rgba(239,68,68,0.15)"
+              boxShadow: "0 2px 6px rgba(220,38,38,0.2)"
             }}>
               <div>
-                <div style={{ fontSize: 11, fontWeight: 700, opacity: 0.9 }}>AS4134</div>
-                <div style={{ fontSize: 12, fontWeight: 600, marginTop: 2 }}>China Telecom</div>
+                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.85, letterSpacing: "0.04em" }}>AS4134 • HIGH THREAT</div>
+                <div style={{ fontSize: 13, fontWeight: 700, marginTop: 2 }}>China Telecom</div>
               </div>
-              <div style={{ fontSize: 20, fontWeight: 800, fontFamily: "monospace" }}>62,581</div>
+              <div style={{ fontSize: 22, fontWeight: 800, fontFamily: "monospace" }}>62,581</div>
             </div>
 
             {/* AS8075 Microsoft */}
             <div style={{
-              background: "linear-gradient(135deg, #60A5FA, #3B82F6)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#F8FAFC", border: "1px solid var(--border)",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS8075</div>
-                <div style={{ fontSize: 11, fontWeight: 600 }}>Microsoft</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>AS8075</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "#1E293B" }}>Microsoft</div>
               </div>
-              <div style={{ fontSize: 14, fontWeight: 800, fontFamily: "monospace" }}>12,340</div>
+              <div style={{ fontSize: 14, fontWeight: 700, fontFamily: "monospace", color: "#2563EB" }}>12,340</div>
             </div>
 
             {/* AS13335 Cloudflare */}
             <div style={{
-              background: "linear-gradient(135deg, #A78BFA, #8B5CF6)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#F8FAFC", border: "1px solid var(--border)",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS13335</div>
-                <div style={{ fontSize: 11, fontWeight: 600 }}>Cloudflare</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>AS13335</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "#1E293B" }}>Cloudflare</div>
               </div>
-              <div style={{ fontSize: 14, fontWeight: 800, fontFamily: "monospace" }}>6,540</div>
+              <div style={{ fontSize: 14, fontWeight: 700, fontFamily: "monospace", color: "#475569" }}>6,540</div>
             </div>
 
             {/* AS3320 Deutsche Telekom */}
             <div style={{
-              background: "linear-gradient(135deg, #4ADE80, #10B981)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#F8FAFC", border: "1px solid var(--border)",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS3320</div>
-                <div style={{ fontSize: 10, fontWeight: 600, lineHeight: 1.1 }}>Deutsche Telekom</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>AS3320</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#1E293B", lineHeight: 1.1 }}>Deutsche Tel.</div>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 800, fontFamily: "monospace" }}>4,100</div>
+              <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace", color: "#475569" }}>4,100</div>
             </div>
 
             {/* AS16509 Amazon AWS */}
             <div style={{
-              background: "linear-gradient(135deg, #FB923C, #F97316)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#F8FAFC", border: "1px solid var(--border)",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS16509</div>
-                <div style={{ fontSize: 11, fontWeight: 600 }}>Amazon AWS</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>AS16509</div>
+                <div style={{ fontSize: 11, fontWeight: 600, color: "#1E293B" }}>Amazon AWS</div>
               </div>
-              <div style={{ fontSize: 14, fontWeight: 800, fontFamily: "monospace" }}>8,901</div>
+              <div style={{ fontSize: 14, fontWeight: 700, fontFamily: "monospace", color: "#475569" }}>8,901</div>
             </div>
 
             {/* AS4837 China Unicom */}
             <div style={{
-              background: "linear-gradient(135deg, #F472B6, #EC4899)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#FEF2F2", border: "1px solid #FECACA",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS4837</div>
-                <div style={{ fontSize: 10, fontWeight: 600 }}>China Unicom</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#DC2626" }}>AS4837</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#991B1B" }}>China Unicom</div>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 800, fontFamily: "monospace" }}>5,210</div>
+              <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace", color: "#DC2626" }}>5,210</div>
             </div>
 
             {/* AS6939 Hurricane Electric */}
             <div style={{
               gridColumn: "4",
-              background: "linear-gradient(135deg, #94A3B8, #64748B)",
-              borderRadius: 8, padding: 10, color: "white",
+              background: "#F8FAFC", border: "1px solid var(--border)",
+              borderRadius: 8, padding: 10, color: "#0F172A",
               display: "flex", flexDirection: "column", justifyContent: "space-between"
             }}>
               <div>
-                <div style={{ fontSize: 10, fontWeight: 700, opacity: 0.9 }}>AS6939</div>
-                <div style={{ fontSize: 9, fontWeight: 600, lineHeight: 1.1 }}>Hurricane Electric</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B" }}>AS6939</div>
+                <div style={{ fontSize: 9, fontWeight: 600, color: "#1E293B", lineHeight: 1.1 }}>Hurricane Elec.</div>
               </div>
-              <div style={{ fontSize: 13, fontWeight: 800, fontFamily: "monospace" }}>3,200</div>
+              <div style={{ fontSize: 13, fontWeight: 700, fontFamily: "monospace", color: "#475569" }}>3,200</div>
             </div>
 
           </div>

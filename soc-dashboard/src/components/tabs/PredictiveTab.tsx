@@ -312,13 +312,13 @@ export default function PredictiveTab() {
 
             {/* Metric 1: Peak RPS */}
             <div style={{ padding: "10px 12px", borderRadius: 8, background: "#FEF2F2", border: "1px solid #FEE2E2", display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ padding: 6, borderRadius: 6, background: "#FEE2E2", color: "#EF4444" }}>
+              <div style={{ padding: 6, borderRadius: 6, background: "#FEE2E2", color: "#DC2626" }}>
                 <Activity size={16} />
               </div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "#DC2626", lineHeight: 1.1 }}>{peakRps.toLocaleString()}</div>
-                <div style={{ fontSize: 9, fontWeight: 700, color: "#991B1B", textTransform: "uppercase", marginTop: 2 }}>PEAK RPS</div>
-                <div style={{ fontSize: 8, color: "#B91C1C" }}>Simulated</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#DC2626", lineHeight: 1.1 }}>{peakRps.toLocaleString()}</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#991B1B", marginTop: 2 }}>Peak RPS</div>
+                <div style={{ fontSize: 9, color: "#B91C1C" }}>Simulated</div>
               </div>
             </div>
 
@@ -328,21 +328,21 @@ export default function PredictiveTab() {
                 <TrendingUp size={16} />
               </div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "#D97706", lineHeight: 1.1 }}>{userImpact}%</div>
-                <div style={{ fontSize: 9, fontWeight: 700, color: "#92400E", textTransform: "uppercase", marginTop: 2 }}>USERS IMPACTED</div>
-                <div style={{ fontSize: 8, color: "#B45309" }}>Estimated</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#D97706", lineHeight: 1.1 }}>{userImpact}%</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#92400E", marginTop: 2 }}>Users Impacted</div>
+                <div style={{ fontSize: 9, color: "#B45309" }}>Estimated</div>
               </div>
             </div>
 
             {/* Metric 3: Time to Disruption */}
             <div style={{ padding: "10px 12px", borderRadius: 8, background: "#F5F3FF", border: "1px solid #DDD6FE", display: "flex", alignItems: "center", gap: 8 }}>
-              <div style={{ padding: 6, borderRadius: 6, background: "#EDE9FE", color: "#8B5CF6" }}>
+              <div style={{ padding: 6, borderRadius: 6, background: "#EDE9FE", color: "#7C3AED" }}>
                 <Clock size={16} />
               </div>
               <div>
-                <div style={{ fontSize: 14, fontWeight: 800, color: "#7C3AED", lineHeight: 1.1 }}>{estRto}s</div>
-                <div style={{ fontSize: 9, fontWeight: 700, color: "#5B21B6", textTransform: "uppercase", marginTop: 2 }}>TIME TO DISRUPTION</div>
-                <div style={{ fontSize: 8, color: "#6D28D9" }}>Predicted (RTO)</div>
+                <div style={{ fontSize: 14, fontWeight: 700, color: "#7C3AED", lineHeight: 1.1 }}>{estRto}s</div>
+                <div style={{ fontSize: 10, fontWeight: 600, color: "#5B21B6", marginTop: 2 }}>Time to Disruption</div>
+                <div style={{ fontSize: 9, color: "#6D28D9" }}>Predicted (RTO)</div>
               </div>
             </div>
 
@@ -350,8 +350,8 @@ export default function PredictiveTab() {
 
           {/* Auto-Actions Triggered */}
           <div>
-            <div style={{ fontSize: 10, fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 8 }}>
-              AUTO-ACTIONS TRIGGERED
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#475569", marginBottom: 8 }}>
+              Auto-Actions Triggered
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
 
@@ -404,11 +404,11 @@ export default function PredictiveTab() {
         {/* Metric 1: Current RPS */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ padding: 8, borderRadius: 8, background: "#EFF6FF", color: "#2563EB" }}>
-            <Activity size={18} />
+            <Activity size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>4,912</div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>CURRENT RPS</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A", lineHeight: 1 }}>4,912</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B", marginTop: 2 }}>Current RPS</div>
             <div style={{ fontSize: 9, color: "#059669", fontWeight: 600 }}>↓ 3.2% vs 30m avg</div>
           </div>
         </div>
@@ -416,11 +416,11 @@ export default function PredictiveTab() {
         {/* Metric 2: Predicted Growth */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ padding: 8, borderRadius: 8, background: "#FFFBEB", color: "#D97706" }}>
-            <TrendingUp size={18} />
+            <TrendingUp size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>+31.4%</div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>PREDICTED GROWTH</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A", lineHeight: 1 }}>+31.4%</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B", marginTop: 2 }}>Predicted Growth</div>
             <div style={{ fontSize: 9, color: "#94A3B8" }}>Next 15 minutes</div>
           </div>
         </div>
@@ -428,23 +428,23 @@ export default function PredictiveTab() {
         {/* Metric 3: Threat Threshold */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ padding: 8, borderRadius: 8, background: "#F5F3FF", color: "#7C3AED" }}>
-            <Target size={18} />
+            <Target size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>7,000</div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>THREAT THRESHOLD</div>
-            <div style={{ fontSize: 9, color: "#94A3B8" }}>RPS</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A", lineHeight: 1 }}>7,000</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B", marginTop: 2 }}>Threat Threshold</div>
+            <div style={{ fontSize: 9, color: "#94A3B8" }}>RPS capacity</div>
           </div>
         </div>
 
         {/* Metric 4: Model Accuracy */}
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ padding: 8, borderRadius: 8, background: "#ECFDF5", color: "#059669" }}>
-            <ShieldCheck size={18} />
+            <ShieldCheck size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: "#0F172A", lineHeight: 1 }}>97%</div>
-            <div style={{ fontSize: 9, fontWeight: 700, color: "#64748B", textTransform: "uppercase", marginTop: 2 }}>MODEL ACCURACY</div>
+            <div style={{ fontSize: 15, fontWeight: 700, color: "#0F172A", lineHeight: 1 }}>97%</div>
+            <div style={{ fontSize: 10, fontWeight: 600, color: "#64748B", marginTop: 2 }}>Model Accuracy</div>
             <div style={{ fontSize: 9, color: "#059669", fontWeight: 600 }}>High Confidence</div>
           </div>
         </div>

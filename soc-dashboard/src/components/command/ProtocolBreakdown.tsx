@@ -4,10 +4,10 @@ import { ArrowRight } from "lucide-react";
 // Sunburst-style SVG protocol ring
 const protocols = [
   { name: "HTTP/1.1", pct: 38, color: "#2563EB" },
-  { name: "HTTP/2",   pct: 25, color: "#0EA5E9" },
+  { name: "HTTP/2",   pct: 25, color: "#0284C7" },
   { name: "UDP Flood",pct: 18, color: "#D97706" },
   { name: "SYN Flood",pct: 12, color: "#DC2626" },
-  { name: "HTTPS",    pct:  7, color: "#059669" },
+  { name: "HTTPS",    pct:  7, color: "#64748B" },
 ];
 
 function ProtocolRing() {
