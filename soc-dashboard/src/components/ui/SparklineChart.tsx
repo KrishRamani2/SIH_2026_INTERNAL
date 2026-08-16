@@ -8,7 +8,7 @@ interface SparklineProps {
   height?: number;
 }
 
-export default function Sparkline({ data, color = "#06b6d4", height = 32 }: SparklineProps) {
+export default function Sparkline({ data, color = "#161616", height = 32 }: SparklineProps) {
   return (
     <ResponsiveContainer width="100%" height={height}>
       <LineChart data={data} margin={{ top: 2, right: 2, bottom: 2, left: 2 }}>

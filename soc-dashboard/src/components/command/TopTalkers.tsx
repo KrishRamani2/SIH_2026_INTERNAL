@@ -11,20 +11,20 @@ const sources = [
   { rank: 7, ip: "103.21.244.0/24", req: "430K", blocked: "78%", risk: 61, conf: "Medium" },
 ];
 
-const confColor: Record<string, string> = { Critical: "#DC2626", High: "#D97706", Medium: "#D97706" };
-const riskBg: Record<string, string>   = { Critical: "#FEF2F2", High: "#FFFBEB", Medium: "#FFFBEB" };
+const confColor: Record<string, string> = { Critical: "#F25C1F", High: "#F25C1F", Medium: "#F25C1F" };
+const riskBg: Record<string, string>   = { Critical: "#F25C1F33", High: "#F25C1F33", Medium: "#F25C1F33" };
 
 export default function TopTalkers() {
   return (
     <div className="card" style={{ padding: "18px 20px" }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 14 }}>
+      <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 14 }}>
         Top Attack Sources (Top Talkers)
       </div>
       <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
         <thead>
-          <tr style={{ borderBottom: "1px solid #F1F5F9" }}>
+          <tr style={{ borderBottom: "1px solid #EBEAE5" }}>
             {["#", "Source IP / Subnet", "Requests", "Blocked %", "Risk Score"].map(h => (
-              <th key={h} style={{ padding: "4px 8px 8px", textAlign: "left", fontSize: 10, fontWeight: 600, color: "#94A3B8", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+              <th key={h} style={{ padding: "4px 8px 8px", textAlign: "left", fontSize: 10, fontWeight: 600, color: "#C4C1B8", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                 {h}
               </th>
             ))}
@@ -32,18 +32,18 @@ export default function TopTalkers() {
         </thead>
         <tbody>
           {sources.map(s => (
-            <tr key={s.rank} className="row-hover" style={{ borderBottom: "1px solid #F8FAFC" }}>
-              <td style={{ padding: "7px 8px", color: "#94A3B8", fontWeight: 600 }}>{s.rank}</td>
+            <tr key={s.rank} className="row-hover" style={{ borderBottom: "1px solid #F4F3EF" }}>
+              <td style={{ padding: "7px 8px", color: "#C4C1B8", fontWeight: 600 }}>{s.rank}</td>
               <td style={{ padding: "7px 8px" }}>
-                <span style={{ fontFamily: "monospace", fontSize: 11, color: "#0F172A", fontWeight: 600 }}>{s.ip}</span>
+                <span style={{ fontFamily: "monospace", fontSize: 11, color: "#161616", fontWeight: 600 }}>{s.ip}</span>
               </td>
-              <td style={{ padding: "7px 8px", color: "#475569", fontWeight: 500 }}>{s.req}</td>
+              <td style={{ padding: "7px 8px", color: "#8E8B82", fontWeight: 500 }}>{s.req}</td>
               <td style={{ padding: "7px 8px" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ width: 48, height: 4, borderRadius: 99, background: "#F1F5F9", overflow: "hidden" }}>
-                    <div style={{ width: s.blocked, height: "100%", background: "#059669", borderRadius: 99 }} />
+                  <div style={{ width: 48, height: 4, borderRadius: 99, background: "#EBEAE5", overflow: "hidden" }}>
+                    <div style={{ width: s.blocked, height: "100%", background: "#8E8B82", borderRadius: 99 }} />
                   </div>
-                  <span style={{ fontSize: 11, fontWeight: 600, color: "#059669" }}>{s.blocked}</span>
+                  <span style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>{s.blocked}</span>
                 </div>
               </td>
               <td style={{ padding: "7px 8px" }}>
@@ -59,7 +59,7 @@ export default function TopTalkers() {
           ))}
         </tbody>
       </table>
-      <button style={{ marginTop: 10, fontSize: 11, color: "#2563EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", gap: 3 }}>
+      <button style={{ marginTop: 10, fontSize: 11, color: "#161616", background: "none", border: "none", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", gap: 3 }}>
         View Full Report <ArrowRight size={11} />
       </button>
     </div>

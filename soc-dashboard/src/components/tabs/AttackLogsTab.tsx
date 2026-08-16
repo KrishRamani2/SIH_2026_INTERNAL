@@ -131,17 +131,17 @@ export default function AttackLogsTab() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
-            background: "#FEF2F2", border: "1px solid #FECACA",
+            background: "#F25C1F33", border: "1px solid #FECACA",
             display: "flex", alignItems: "center", justifyContent: "center",
             flexShrink: 0
           }}>
-            <ShieldAlert size={18} color="#DC2626" />
+            <ShieldAlert size={18} color="#F25C1F" />
           </div>
           <div>
-            <h2 style={{ fontSize: 16, fontWeight: 700, color: "#0F172A", letterSpacing: "-0.01em" }}>
+            <h2 style={{ fontSize: 16, fontWeight: 700, color: "#161616", letterSpacing: "-0.01em" }}>
               Attack Logs &amp; Telemetry
             </h2>
-            <p style={{ fontSize: 11, color: "#64748B" }}>
+            <p style={{ fontSize: 11, color: "#8E8B82" }}>
               Granular DDoS logbook, JA3 signatures, WAF action telemetry &amp; CERT-In reporting
             </p>
           </div>
@@ -154,13 +154,13 @@ export default function AttackLogsTab() {
             style={{
               display: "flex", alignItems: "center", gap: 6,
               padding: "6px 12px", borderRadius: 7,
-              border: `1px solid ${isLiveStreaming ? "#BFDBFE" : "#E2E8F0"}`,
-              background: isLiveStreaming ? "#EFF6FF" : "white",
-              color: isLiveStreaming ? "#2563EB" : "#64748B",
+              border: `1px solid ${isLiveStreaming ? "#BFDBFE" : "#C4C1B8"}`,
+              background: isLiveStreaming ? "#EBEAE5" : "white",
+              color: isLiveStreaming ? "#161616" : "#8E8B82",
               fontSize: 11, fontWeight: 600, cursor: "pointer"
             }}
           >
-            {isLiveStreaming ? <Pause size={13} color="#2563EB" /> : <Play size={13} color="#64748B" />}
+            {isLiveStreaming ? <Pause size={13} color="#161616" /> : <Play size={13} color="#8E8B82" />}
             {isLiveStreaming ? "Live Stream Active" : "Stream Paused"}
           </button>
 
@@ -170,11 +170,11 @@ export default function AttackLogsTab() {
             style={{
               display: "flex", alignItems: "center", gap: 6,
               padding: "6px 12px", borderRadius: 7,
-              border: "1px solid var(--border)", background: "#FFFFFF",
-              color: "#334155", fontSize: 11, fontWeight: 600, cursor: "pointer"
+              border: "1px solid var(--border)", background: "#FCFBF9",
+              color: "#8E8B82", fontSize: 11, fontWeight: 600, cursor: "pointer"
             }}
           >
-            <RefreshCw size={13} color="#2563EB" /> Refresh
+            <RefreshCw size={13} color="#161616" /> Refresh
           </button>
 
           {/* Export PDF Button */}
@@ -183,13 +183,13 @@ export default function AttackLogsTab() {
             style={{
               display: "flex", alignItems: "center", gap: 6,
               padding: "6px 14px", borderRadius: 7,
-              background: "#0F172A",
-              color: "#FFFFFF", fontSize: 11, fontWeight: 600,
-              border: "1px solid #1E293B", cursor: "pointer",
+              background: "#161616",
+              color: "#FCFBF9", fontSize: 11, fontWeight: 600,
+              border: "1px solid #161616", cursor: "pointer",
               boxShadow: "0 1px 3px rgba(15,23,42,0.12)"
             }}
           >
-            <Download size={13} color="#F59E0B" /> Export Report
+            <Download size={13} color="#F25C1F" /> Export Report
           </button>
         </div>
       </div>
@@ -199,73 +199,73 @@ export default function AttackLogsTab() {
 
         {/* Card 1: Critical Events */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#FEF2F2", color: "#DC2626", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#F25C1F33", color: "#F25C1F", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <AlertTriangle size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Critical Events</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#DC2626", lineHeight: 1.1, marginTop: 1 }}>{criticalCount}</div>
-            <div style={{ fontSize: 10, color: "#94A3B8" }}>High priority</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Critical Events</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#F25C1F", lineHeight: 1.1, marginTop: 1 }}>{criticalCount}</div>
+            <div style={{ fontSize: 10, color: "#C4C1B8" }}>High priority</div>
           </div>
         </div>
 
         {/* Card 2: Total Events */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#FFFBEB", color: "#D97706", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#F25C1F33", color: "#F25C1F", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <FileText size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Total Events</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#0F172A", lineHeight: 1.1, marginTop: 1 }}>{logs.length}</div>
-            <div style={{ fontSize: 10, color: "#94A3B8" }}>Last 24 hours</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Total Events</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#161616", lineHeight: 1.1, marginTop: 1 }}>{logs.length}</div>
+            <div style={{ fontSize: 10, color: "#C4C1B8" }}>Last 24 hours</div>
           </div>
         </div>
 
         {/* Card 3: Blocked Attacks */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#F5F3FF", color: "#7C3AED", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#EBEAE5", color: "#161616", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Shield size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Blocked Attacks</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#0F172A", lineHeight: 1.1, marginTop: 1 }}>{blockedCount}</div>
-            <div style={{ fontSize: 10, color: "#7C3AED", fontWeight: 600 }}>{blockedPct}% rate</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Blocked Attacks</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#161616", lineHeight: 1.1, marginTop: 1 }}>{blockedCount}</div>
+            <div style={{ fontSize: 10, color: "#161616", fontWeight: 600 }}>{blockedPct}% rate</div>
           </div>
         </div>
 
         {/* Card 4: Unique Sources */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#EFF6FF", color: "#2563EB", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#EBEAE5", color: "#161616", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Fingerprint size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Unique Sources</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#0F172A", lineHeight: 1.1, marginTop: 1 }}>{uniqueSourcesCount}</div>
-            <div style={{ fontSize: 10, color: "#94A3B8" }}>Distinct IP/ASN</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Unique Sources</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#161616", lineHeight: 1.1, marginTop: 1 }}>{uniqueSourcesCount}</div>
+            <div style={{ fontSize: 10, color: "#C4C1B8" }}>Distinct IP/ASN</div>
           </div>
         </div>
 
         {/* Card 5: CERT-In Compliant */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#ECFDF5", color: "#059669", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#EBEAE5", color: "#8E8B82", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <CheckCircle2 size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Compliance</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#059669", lineHeight: 1.1, marginTop: 1 }}>100%</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Compliance</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#8E8B82", lineHeight: 1.1, marginTop: 1 }}>100%</div>
             <div style={{ fontSize: 10, color: "#047857" }}>All logs filed</div>
           </div>
         </div>
 
         {/* Card 6: Traffic Over Baseline */}
         <div className="card" style={{ padding: "12px 14px", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#F0F9FF", color: "#0284C7", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <div style={{ width: 34, height: 34, borderRadius: 8, background: "#EBEAE5", color: "#161616", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
             <Activity size={17} />
           </div>
           <div>
-            <div style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Baseline Delta</div>
-            <div style={{ fontSize: 18, fontWeight: 700, color: "#0284C7", lineHeight: 1.1, marginTop: 1 }}>+340%</div>
-            <div style={{ fontSize: 10, color: "#94A3B8" }}>Current peak</div>
+            <div style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Baseline Delta</div>
+            <div style={{ fontSize: 18, fontWeight: 700, color: "#161616", lineHeight: 1.1, marginTop: 1 }}>+340%</div>
+            <div style={{ fontSize: 10, color: "#C4C1B8" }}>Current peak</div>
           </div>
         </div>
 
@@ -274,24 +274,24 @@ export default function AttackLogsTab() {
       {/* ─── Search & Toolbar Row ─── */}
       <div className="card" style={{ padding: "12px 18px", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 14, flexWrap: "wrap" }}>
         {/* Search Input */}
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 280, background: "#F8FAFC", border: "1px solid #E2E8F0", padding: "7px 12px", borderRadius: 8 }}>
-          <Search size={16} color="#94A3B8" />
+        <div style={{ display: "flex", alignItems: "center", gap: 8, flex: 1, minWidth: 280, background: "#F4F3EF", border: "1px solid #C4C1B8", padding: "7px 12px", borderRadius: 8 }}>
+          <Search size={16} color="#C4C1B8" />
           <input
             type="text"
             placeholder="Search by IP, ASN, Attack Type, Endpoint, WAF Rule or Log ID..."
             value={searchTerm}
             onChange={e => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-            style={{ border: "none", background: "transparent", outline: "none", fontSize: 12, width: "100%", color: "#0F172A" }}
+            style={{ border: "none", background: "transparent", outline: "none", fontSize: 12, width: "100%", color: "#161616" }}
           />
         </div>
 
         {/* Severity Select */}
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>Severity:</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>Severity:</span>
           <select
             value={severityFilter}
             onChange={e => { setSeverityFilter(e.target.value); setCurrentPage(1); }}
-            style={{ padding: "6px 12px", borderRadius: 6, border: "1px solid #CBD5E1", fontSize: 11, background: "white", color: "#0F172A", fontWeight: 600 }}
+            style={{ padding: "6px 12px", borderRadius: 6, border: "1px solid #A8A49B", fontSize: 11, background: "white", color: "#161616", fontWeight: 600 }}
           >
             <option value="ALL">All Severities</option>
             <option value="CRITICAL">Critical</option>
@@ -303,11 +303,11 @@ export default function AttackLogsTab() {
 
         {/* WAF Action Select */}
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 11, fontWeight: 600, color: "#64748B" }}>WAF Action:</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: "#8E8B82" }}>WAF Action:</span>
           <select
             value={actionFilter}
             onChange={e => { setActionFilter(e.target.value); setCurrentPage(1); }}
-            style={{ padding: "6px 12px", borderRadius: 6, border: "1px solid #CBD5E1", fontSize: 11, background: "white", color: "#0F172A", fontWeight: 600 }}
+            style={{ padding: "6px 12px", borderRadius: 6, border: "1px solid #A8A49B", fontSize: 11, background: "white", color: "#161616", fontWeight: 600 }}
           >
             <option value="ALL">All Actions</option>
             <option value="BLOCKED">Blocked</option>
@@ -318,7 +318,7 @@ export default function AttackLogsTab() {
         </div>
 
         {/* Log Counter Pill */}
-        <div style={{ fontSize: 11, fontWeight: 700, color: "#2563EB", background: "#EFF6FF", padding: "5px 12px", borderRadius: 6, border: "1px solid #BFDBFE", display: "flex", alignItems: "center", gap: 6 }}>
+        <div style={{ fontSize: 11, fontWeight: 700, color: "#161616", background: "#EBEAE5", padding: "5px 12px", borderRadius: 6, border: "1px solid #BFDBFE", display: "flex", alignItems: "center", gap: 6 }}>
           <Layers size={14} /> Showing {filteredLogs.length} of {logs.length} logs
         </div>
       </div>
@@ -330,30 +330,30 @@ export default function AttackLogsTab() {
         <div className="card" style={{ padding: 0, overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 520 }}>
           <div>
             {/* Table Header Strip */}
-            <div style={{ padding: "14px 20px", borderBottom: "1px solid #F1F5F9", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#FFFFFF" }}>
-              <div style={{ fontSize: 13, fontWeight: 800, color: "#0F172A", display: "flex", alignItems: "center", gap: 8 }}>
-                <FileText size={16} color="#2563EB" /> Real-Time Ingress Telemetry Logbook
+            <div style={{ padding: "14px 20px", borderBottom: "1px solid #EBEAE5", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#FCFBF9" }}>
+              <div style={{ fontSize: 13, fontWeight: 800, color: "#161616", display: "flex", alignItems: "center", gap: 8 }}>
+                <FileText size={16} color="#161616" /> Real-Time Ingress Telemetry Logbook
                 {isLiveStreaming && (
-                  <span style={{ fontSize: 10, color: "#059669", background: "#ECFDF5", padding: "2px 8px", borderRadius: 99, border: "1px solid #A7F3D0", display: "flex", alignItems: "center", gap: 4 }}>
-                    <span className="dot-pulse" style={{ background: "#059669", width: 5, height: 5 }} /> Live Ingress
+                  <span style={{ fontSize: 10, color: "#8E8B82", background: "#EBEAE5", padding: "2px 8px", borderRadius: 99, border: "1px solid #C4C1B8", display: "flex", alignItems: "center", gap: 4 }}>
+                    <span className="dot-pulse" style={{ background: "#8E8B82", width: 5, height: 5 }} /> Live Ingress
                   </span>
                 )}
               </div>
-              <span style={{ fontSize: 11, color: "#94A3B8" }}>Click any row to inspect deep packet details</span>
+              <span style={{ fontSize: 11, color: "#C4C1B8" }}>Click any row to inspect deep packet details</span>
             </div>
 
             {/* Table Body */}
             <div style={{ overflowX: "auto" }}>
               <table style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                 <thead>
-                  <tr style={{ background: "#F8FAFC", borderBottom: "1px solid #E2E8F0" }}>
-                    <th style={{ padding: "10px 16px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>ID &amp; TIME</th>
-                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>SEVERITY</th>
-                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>SOURCE IP &amp; ASN</th>
-                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>ATTACK VECTOR</th>
-                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>TARGET ENDPOINT</th>
-                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#64748B" }}>WAF ACTION</th>
-                    <th style={{ padding: "10px 16px", fontSize: 10, fontWeight: 700, color: "#64748B", textAlign: "center" }}>CERT-IN</th>
+                  <tr style={{ background: "#F4F3EF", borderBottom: "1px solid #C4C1B8" }}>
+                    <th style={{ padding: "10px 16px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>ID &amp; TIME</th>
+                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>SEVERITY</th>
+                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>SOURCE IP &amp; ASN</th>
+                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>ATTACK VECTOR</th>
+                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>TARGET ENDPOINT</th>
+                    <th style={{ padding: "10px 14px", fontSize: 10, fontWeight: 700, color: "#8E8B82" }}>WAF ACTION</th>
+                    <th style={{ padding: "10px 16px", fontSize: 10, fontWeight: 700, color: "#8E8B82", textAlign: "center" }}>CERT-IN</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -361,33 +361,33 @@ export default function AttackLogsTab() {
                     const isSelected = selectedLog?.id === log.id;
                     const isJustAdded = newLogId === log.id;
 
-                    let borderStripColor = "#2563EB";
-                    let sevBg = "#FEF2F2", sevText = "#DC2626", SevIcon = AlertTriangle;
+                    let borderStripColor = "#161616";
+                    let sevBg = "#F25C1F33", sevText = "#F25C1F", SevIcon = AlertTriangle;
 
                     if (log.severity === "CRITICAL") {
-                      borderStripColor = "#DC2626";
-                      sevBg = "#FEF2F2"; sevText = "#DC2626"; SevIcon = AlertTriangle;
+                      borderStripColor = "#F25C1F";
+                      sevBg = "#F25C1F33"; sevText = "#F25C1F"; SevIcon = AlertTriangle;
                     } else if (log.severity === "CERT_ALERT" || log.severity === "WARNING") {
-                      borderStripColor = "#D97706";
-                      sevBg = "#FFFBEB"; sevText = "#D97706"; SevIcon = AlertCircle;
+                      borderStripColor = "#F25C1F";
+                      sevBg = "#F25C1F33"; sevText = "#F25C1F"; SevIcon = AlertCircle;
                     } else if (log.severity === "INFO") {
-                      borderStripColor = "#2563EB";
-                      sevBg = "#EFF6FF"; sevText = "#2563EB"; SevIcon = Info;
+                      borderStripColor = "#161616";
+                      sevBg = "#EBEAE5"; sevText = "#161616"; SevIcon = Info;
                     }
 
-                    let actBg = "#FEF2F2", actText = "#DC2626";
-                    if (log.action === "RATE_LIMITED") { actBg = "#FFFBEB"; actText = "#D97706"; }
-                    else if (log.action === "CHALLENGED") { actBg = "#F5F3FF"; actText = "#7C3AED"; }
-                    else if (log.action === "FLAGGED") { actBg = "#F0F9FF"; actText = "#0284C7"; }
+                    let actBg = "#F25C1F33", actText = "#F25C1F";
+                    if (log.action === "RATE_LIMITED") { actBg = "#F25C1F33"; actText = "#F25C1F"; }
+                    else if (log.action === "CHALLENGED") { actBg = "#EBEAE5"; actText = "#161616"; }
+                    else if (log.action === "FLAGGED") { actBg = "#EBEAE5"; actText = "#161616"; }
 
                     return (
                       <tr
                         key={log.id}
                         onClick={() => setSelectedLog(log)}
                         style={{
-                          borderBottom: "1px solid #F1F5F9",
+                          borderBottom: "1px solid #EBEAE5",
                           cursor: "pointer",
-                          background: isJustAdded ? "#EFF6FF" : isSelected ? "#F1F5F9" : "transparent",
+                          background: isJustAdded ? "#EBEAE5" : isSelected ? "#EBEAE5" : "transparent",
                           transition: "background 0.3s ease",
                           position: "relative"
                         }}
@@ -398,8 +398,8 @@ export default function AttackLogsTab() {
                             position: "absolute", left: 0, top: 0, bottom: 0, width: 4,
                             background: borderStripColor, borderRadius: "2px 0 0 2px"
                           }} />
-                          <div style={{ fontSize: 11, fontWeight: 800, color: "#0F172A", fontFamily: "monospace" }}>{log.id}</div>
-                          <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 2 }}>{log.timestamp.split(" ")[1]}</div>
+                          <div style={{ fontSize: 11, fontWeight: 800, color: "#161616", fontFamily: "monospace" }}>{log.id}</div>
+                          <div style={{ fontSize: 10, color: "#C4C1B8", marginTop: 2 }}>{log.timestamp.split(" ")[1]}</div>
                         </td>
 
                         {/* Severity Pill */}
@@ -415,23 +415,23 @@ export default function AttackLogsTab() {
 
                         {/* Source IP & ASN */}
                         <td style={{ padding: "12px 14px" }}>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: "#0F172A", fontFamily: "monospace" }}>{log.sourceIP}</div>
-                          <div style={{ fontSize: 10, color: "#64748B", marginTop: 1 }}>
-                            {log.country} · <span style={{ color: "#94A3B8" }}>{log.asn.split(" ")[0]}</span>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: "#161616", fontFamily: "monospace" }}>{log.sourceIP}</div>
+                          <div style={{ fontSize: 10, color: "#8E8B82", marginTop: 1 }}>
+                            {log.country} · <span style={{ color: "#C4C1B8" }}>{log.asn.split(" ")[0]}</span>
                           </div>
                         </td>
 
                         {/* Attack Vector & Rule */}
                         <td style={{ padding: "12px 14px" }}>
-                          <div style={{ fontSize: 11, fontWeight: 700, color: "#334155" }}>{log.attackType}</div>
-                          <div style={{ fontSize: 10, color: "#94A3B8", fontFamily: "monospace", marginTop: 1 }}>
+                          <div style={{ fontSize: 11, fontWeight: 700, color: "#8E8B82" }}>{log.attackType}</div>
+                          <div style={{ fontSize: 10, color: "#C4C1B8", fontFamily: "monospace", marginTop: 1 }}>
                             Rule: {log.wafRule}
                           </div>
                         </td>
 
                         {/* Target Endpoint */}
                         <td style={{ padding: "12px 14px" }}>
-                          <span style={{ fontSize: 11, color: "#2563EB", fontFamily: "monospace", fontWeight: 600 }}>
+                          <span style={{ fontSize: 11, color: "#161616", fontFamily: "monospace", fontWeight: 600 }}>
                             {log.endpoint}
                           </span>
                         </td>
@@ -450,14 +450,14 @@ export default function AttackLogsTab() {
                         <td style={{ padding: "12px 16px", textAlign: "center" }}>
                           {log.certFiled ? (
                             <span style={{
-                              fontSize: 10, fontWeight: 800, color: "#059669", background: "#ECFDF5",
-                              padding: "3px 8px", borderRadius: 6, border: "1px solid #A7F3D0",
+                              fontSize: 10, fontWeight: 800, color: "#8E8B82", background: "#EBEAE5",
+                              padding: "3px 8px", borderRadius: 6, border: "1px solid #C4C1B8",
                               display: "inline-flex", alignItems: "center", gap: 3
                             }}>
                               ✓ FILED
                             </span>
                           ) : (
-                            <span style={{ fontSize: 11, color: "#CBD5E1" }}>—</span>
+                            <span style={{ fontSize: 11, color: "#A8A49B" }}>—</span>
                           )}
                         </td>
                       </tr>
@@ -469,18 +469,18 @@ export default function AttackLogsTab() {
           </div>
 
           {/* Table Dynamic Interactive Pagination Footer Strip */}
-          <div style={{ padding: "12px 20px", borderTop: "1px solid #F1F5F9", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#F8FAFC" }}>
-            <span style={{ fontSize: 11, color: "#64748B", fontWeight: 600 }}>
-              Page {activePage} of {totalPages} · <strong style={{ color: "#0F172A" }}>{filteredLogs.length}</strong> total events
+          <div style={{ padding: "12px 20px", borderTop: "1px solid #EBEAE5", display: "flex", justifyContent: "space-between", alignItems: "center", background: "#F4F3EF" }}>
+            <span style={{ fontSize: 11, color: "#8E8B82", fontWeight: 600 }}>
+              Page {activePage} of {totalPages} · <strong style={{ color: "#161616" }}>{filteredLogs.length}</strong> total events
             </span>
             <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
               <button
                 disabled={activePage === 1}
                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                 style={{
-                  padding: "5px 10px", borderRadius: 6, border: "1px solid #CBD5E1",
-                  background: activePage === 1 ? "#F1F5F9" : "white",
-                  fontSize: 11, color: activePage === 1 ? "#CBD5E1" : "#0F172A",
+                  padding: "5px 10px", borderRadius: 6, border: "1px solid #A8A49B",
+                  background: activePage === 1 ? "#EBEAE5" : "white",
+                  fontSize: 11, color: activePage === 1 ? "#A8A49B" : "#161616",
                   cursor: activePage === 1 ? "not-allowed" : "pointer", fontWeight: 600
                 }}
               >
@@ -493,9 +493,9 @@ export default function AttackLogsTab() {
                   onClick={() => setCurrentPage(pageNum)}
                   style={{
                     padding: "5px 10px", borderRadius: 6,
-                    border: pageNum === activePage ? "1px solid #2563EB" : "1px solid #CBD5E1",
-                    background: pageNum === activePage ? "#2563EB" : "white",
-                    color: pageNum === activePage ? "white" : "#475569",
+                    border: pageNum === activePage ? "1px solid #161616" : "1px solid #A8A49B",
+                    background: pageNum === activePage ? "#161616" : "white",
+                    color: pageNum === activePage ? "white" : "#8E8B82",
                     fontSize: 11, fontWeight: 700, cursor: "pointer"
                   }}
                 >
@@ -507,9 +507,9 @@ export default function AttackLogsTab() {
                 disabled={activePage === totalPages}
                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                 style={{
-                  padding: "5px 10px", borderRadius: 6, border: "1px solid #CBD5E1",
-                  background: activePage === totalPages ? "#F1F5F9" : "white",
-                  fontSize: 11, color: activePage === totalPages ? "#CBD5E1" : "#0F172A",
+                  padding: "5px 10px", borderRadius: 6, border: "1px solid #A8A49B",
+                  background: activePage === totalPages ? "#EBEAE5" : "white",
+                  fontSize: 11, color: activePage === totalPages ? "#A8A49B" : "#161616",
                   cursor: activePage === totalPages ? "not-allowed" : "pointer", fontWeight: 600
                 }}
               >
@@ -524,39 +524,39 @@ export default function AttackLogsTab() {
           <div className="card" style={{ padding: 20, display: "flex", flexDirection: "column", justifyContent: "space-between", minHeight: 520, boxSizing: "border-box" }}>
             <div>
               {/* Inspector Header */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #F1F5F9", paddingBottom: 12, marginBottom: 14 }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #EBEAE5", paddingBottom: 12, marginBottom: 14 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <Eye size={18} color="#2563EB" />
-                  <span style={{ fontSize: 14, fontWeight: 800, color: "#0F172A" }}>
+                  <Eye size={18} color="#161616" />
+                  <span style={{ fontSize: 14, fontWeight: 800, color: "#161616" }}>
                     Log Inspector #{selectedLog.id}
                   </span>
                 </div>
                 <button
                   onClick={() => setSelectedLog(null)}
-                  style={{ border: "none", background: "none", color: "#94A3B8", cursor: "pointer", fontSize: 12, fontWeight: 600 }}
+                  style={{ border: "none", background: "none", color: "#C4C1B8", cursor: "pointer", fontSize: 12, fontWeight: 600 }}
                 >
                   ✕ Close
                 </button>
               </div>
 
               {/* Metadata Fields Grid */}
-              <div style={{ background: "#F8FAFC", borderRadius: 8, padding: 14, border: "1px solid #E2E8F0", display: "flex", flexDirection: "column", gap: 10, marginBottom: 14 }}>
+              <div style={{ background: "#F4F3EF", borderRadius: 8, padding: 14, border: "1px solid #C4C1B8", display: "flex", flexDirection: "column", gap: 10, marginBottom: 14 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>TIMESTAMP</span>
-                  <span style={{ fontSize: 11, fontWeight: 800, color: "#0F172A", fontFamily: "monospace" }}>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>TIMESTAMP</span>
+                  <span style={{ fontSize: 11, fontWeight: 800, color: "#161616", fontFamily: "monospace" }}>
                     {selectedLog.timestamp} IST
                   </span>
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>SOURCE IP</span>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>SOURCE IP</span>
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ fontSize: 12, fontWeight: 800, color: "#DC2626", fontFamily: "monospace" }}>
+                    <span style={{ fontSize: 12, fontWeight: 800, color: "#F25C1F", fontFamily: "monospace" }}>
                       {selectedLog.sourceIP}
                     </span>
                     <button
                       onClick={() => copyToClipboard(selectedLog.sourceIP, "ip")}
-                      style={{ background: "none", border: "none", color: copiedIp ? "#059669" : "#94A3B8", cursor: "pointer", padding: 2 }}
+                      style={{ background: "none", border: "none", color: copiedIp ? "#8E8B82" : "#C4C1B8", cursor: "pointer", padding: 2 }}
                       title="Copy IP"
                     >
                       {copiedIp ? <Check size={13} /> : <Copy size={13} />}
@@ -565,18 +565,18 @@ export default function AttackLogsTab() {
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>ORGANIZATION / ASN</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: "#0F172A" }}>{selectedLog.asn}</span>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>ORGANIZATION / ASN</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "#161616" }}>{selectedLog.asn}</span>
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>COUNTRY OF ORIGIN</span>
-                  <span style={{ fontSize: 11, fontWeight: 700, color: "#0F172A" }}>{selectedLog.country}</span>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>COUNTRY OF ORIGIN</span>
+                  <span style={{ fontSize: 11, fontWeight: 700, color: "#161616" }}>{selectedLog.country}</span>
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>WAF RULE TRIGGERED</span>
-                  <span style={{ fontSize: 11, fontWeight: 800, color: "#2563EB", fontFamily: "monospace" }}>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>WAF RULE TRIGGERED</span>
+                  <span style={{ fontSize: 11, fontWeight: 800, color: "#161616", fontFamily: "monospace" }}>
                     {selectedLog.wafRule} ({selectedLog.attackType.split("/")[0].trim()} Rule)
                   </span>
                 </div>
@@ -585,18 +585,18 @@ export default function AttackLogsTab() {
               {/* JA3 TLS Fingerprint Hash Box */}
               <div style={{ marginBottom: 14 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                  <span style={{ fontSize: 10, color: "#64748B", fontWeight: 800, textTransform: "uppercase" }}>
+                  <span style={{ fontSize: 10, color: "#8E8B82", fontWeight: 800, textTransform: "uppercase" }}>
                     JA3 TLS FINGERPRINT HASH
                   </span>
                   <button
                     onClick={() => copyToClipboard(selectedLog.ja3, "ja3")}
-                    style={{ background: "none", border: "none", color: copiedJa3 ? "#059669" : "#2563EB", fontSize: 10, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}
+                    style={{ background: "none", border: "none", color: copiedJa3 ? "#8E8B82" : "#161616", fontSize: 10, fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center", gap: 3 }}
                   >
                     {copiedJa3 ? <Check size={12} /> : <Copy size={12} />} {copiedJa3 ? "Copied!" : "Copy Hash"}
                   </button>
                 </div>
                 <div style={{
-                  background: "#0F172A", color: "#38BDF8", padding: "10px 12px", borderRadius: 6,
+                  background: "#161616", color: "#38BDF8", padding: "10px 12px", borderRadius: 6,
                   fontFamily: "monospace", fontSize: 11, wordBreak: "break-all"
                 }}>
                   {selectedLog.ja3}
@@ -605,15 +605,15 @@ export default function AttackLogsTab() {
 
               {/* Payload & Forensic Details Box */}
               <div style={{ marginBottom: 14 }}>
-                <div style={{ fontSize: 10, color: "#64748B", fontWeight: 800, textTransform: "uppercase", marginBottom: 6 }}>
+                <div style={{ fontSize: 10, color: "#8E8B82", fontWeight: 800, textTransform: "uppercase", marginBottom: 6 }}>
                   FORENSIC DETAILS &amp; PAYLOAD ANALYSIS
                 </div>
                 <div style={{
-                  fontSize: 11, color: "#7F1D1D", background: "#FEF2F2",
+                  fontSize: 11, color: "#7F1D1D", background: "#F25C1F33",
                   border: "1px solid #FCA5A5", padding: 12, borderRadius: 8,
                   display: "flex", gap: 10, alignItems: "flex-start"
                 }}>
-                  <AlertTriangle size={18} color="#DC2626" style={{ flexShrink: 0, marginTop: 1 }} />
+                  <AlertTriangle size={18} color="#F25C1F" style={{ flexShrink: 0, marginTop: 1 }} />
                   <div style={{ lineHeight: 1.4, fontWeight: 500 }}>
                     {selectedLog.details}
                   </div>
@@ -626,16 +626,16 @@ export default function AttackLogsTab() {
               {/* CERT-In Filing Status Box */}
               <div style={{
                 padding: "12px 14px", borderRadius: 8,
-                background: selectedLog.certFiled ? "#ECFDF5" : "#FFFBEB",
-                border: `1px solid ${selectedLog.certFiled ? "#A7F3D0" : "#FDE68A"}`,
+                background: selectedLog.certFiled ? "#EBEAE5" : "#F25C1F33",
+                border: `1px solid ${selectedLog.certFiled ? "#C4C1B8" : "#F25C1F33"}`,
                 display: "flex", alignItems: "center", gap: 10, marginBottom: 12
               }}>
-                <Lock size={18} color={selectedLog.certFiled ? "#059669" : "#D97706"} style={{ flexShrink: 0 }} />
+                <Lock size={18} color={selectedLog.certFiled ? "#8E8B82" : "#F25C1F"} style={{ flexShrink: 0 }} />
                 <div>
-                  <div style={{ fontSize: 11, fontWeight: 800, color: selectedLog.certFiled ? "#047857" : "#92400E" }}>
+                  <div style={{ fontSize: 11, fontWeight: 800, color: selectedLog.certFiled ? "#047857" : "#F25C1F" }}>
                     {selectedLog.certFiled ? "CERT-In Mandatory Filing Active" : "Pending Statutory Audit"}
                   </div>
-                  <div style={{ fontSize: 10, color: selectedLog.certFiled ? "#065F46" : "#B45309", marginTop: 2 }}>
+                  <div style={{ fontSize: 10, color: selectedLog.certFiled ? "#065F46" : "#F25C1F", marginTop: 2 }}>
                     Ref: #INC-2026-0815-001 under Section 70B IT Act.
                   </div>
                 </div>
@@ -646,7 +646,7 @@ export default function AttackLogsTab() {
                 onClick={handleExportPdf}
                 style={{
                   width: "100%", padding: "11px 0", borderRadius: 8, border: "none",
-                  background: "#2563EB", color: "white", fontSize: 12, fontWeight: 800,
+                  background: "#161616", color: "white", fontSize: 12, fontWeight: 800,
                   cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
                   boxShadow: "0 2px 8px rgba(37,99,235,0.25)"
                 }}
@@ -662,8 +662,8 @@ export default function AttackLogsTab() {
       {/* ─── Bottom Banner: CERT-In Statutory Compliance Card ─── */}
       <div className="card" style={{
         padding: "20px 24px",
-        background: "linear-gradient(135deg, #F0F9FF, #E0F2FE)",
-        border: "1px solid #BAE6FD",
+        background: "linear-gradient(135deg, #EBEAE5, #C4C1B8)",
+        border: "1px solid #C4C1B8",
         display: "grid",
         gridTemplateColumns: "2.2fr 1.2fr 1.2fr 1.2fr",
         gap: 20,
@@ -673,26 +673,26 @@ export default function AttackLogsTab() {
         <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
           <div style={{
             width: 48, height: 48, borderRadius: "50%",
-            background: "#EFF6FF", border: "2px solid #93C5FD",
+            background: "#EBEAE5", border: "2px solid #93C5FD",
             display: "flex", alignItems: "center", justifyContent: "center",
-            color: "#2563EB", flexShrink: 0
+            color: "#161616", flexShrink: 0
           }}>
-            <Shield size={26} color="#2563EB" />
+            <Shield size={26} color="#161616" />
           </div>
           <div>
-            <div style={{ fontSize: 10, fontWeight: 800, color: "#2563EB", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+            <div style={{ fontSize: 10, fontWeight: 800, color: "#161616", textTransform: "uppercase", letterSpacing: "0.04em" }}>
               CERT-IN STATUTORY COMPLIANCE DIRECTIVE
             </div>
-            <div style={{ fontSize: 15, fontWeight: 800, color: "#0F172A", marginTop: 2 }}>
+            <div style={{ fontSize: 15, fontWeight: 800, color: "#161616", marginTop: 2 }}>
               Aegis-Bharat Automated Audit Report Available
             </div>
-            <div style={{ fontSize: 11, color: "#475569", marginTop: 2 }}>
+            <div style={{ fontSize: 11, color: "#8E8B82", marginTop: 2 }}>
               Includes branded Aegis-Bharat cover page, executive threat summary, logs matrix, and CISO approval signature blocks.
             </div>
             <button
               onClick={handleExportPdf}
               style={{
-                marginTop: 6, border: "none", background: "none", color: "#2563EB",
+                marginTop: 6, border: "none", background: "none", color: "#161616",
                 fontSize: 11, fontWeight: 700, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 4
               }}
             >
@@ -702,19 +702,19 @@ export default function AttackLogsTab() {
         </div>
 
         {/* Center Section 1: Incident Ref */}
-        <div style={{ background: "white", padding: "12px 14px", borderRadius: 8, border: "1px solid #E0F2FE" }}>
-          <div style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>Incident Filing Reference</div>
-          <div style={{ fontSize: 14, fontWeight: 800, color: "#0F172A", marginTop: 2, fontFamily: "monospace" }}>#INC-2026-0815-001</div>
-          <div style={{ fontSize: 10, color: "#059669", fontWeight: 600, marginTop: 2 }}>Filed under IT Act Sec 70B</div>
+        <div style={{ background: "white", padding: "12px 14px", borderRadius: 8, border: "1px solid #C4C1B8" }}>
+          <div style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>Incident Filing Reference</div>
+          <div style={{ fontSize: 14, fontWeight: 800, color: "#161616", marginTop: 2, fontFamily: "monospace" }}>#INC-2026-0815-001</div>
+          <div style={{ fontSize: 10, color: "#8E8B82", fontWeight: 600, marginTop: 2 }}>Filed under IT Act Sec 70B</div>
         </div>
 
         {/* Center Section 2: Compliance Status */}
-        <div style={{ background: "white", padding: "12px 14px", borderRadius: 8, border: "1px solid #E0F2FE" }}>
-          <div style={{ fontSize: 10, color: "#64748B", fontWeight: 700 }}>Compliance Status</div>
-          <div style={{ fontSize: 14, fontWeight: 800, color: "#059669", marginTop: 2, display: "flex", alignItems: "center", gap: 4 }}>
-            <CheckCircle2 size={16} color="#059669" /> 100% Verified
+        <div style={{ background: "white", padding: "12px 14px", borderRadius: 8, border: "1px solid #C4C1B8" }}>
+          <div style={{ fontSize: 10, color: "#8E8B82", fontWeight: 700 }}>Compliance Status</div>
+          <div style={{ fontSize: 14, fontWeight: 800, color: "#8E8B82", marginTop: 2, display: "flex", alignItems: "center", gap: 4 }}>
+            <CheckCircle2 size={16} color="#8E8B82" /> 100% Verified
           </div>
-          <div style={{ fontSize: 10, color: "#64748B", marginTop: 2 }}>Audited &amp; Encrypted</div>
+          <div style={{ fontSize: 10, color: "#8E8B82", marginTop: 2 }}>Audited &amp; Encrypted</div>
         </div>
 
         {/* Right Section: Unlock PDF Button */}
@@ -722,13 +722,13 @@ export default function AttackLogsTab() {
           <button
             onClick={handleExportPdf}
             style={{
-              padding: "12px 20px", borderRadius: 8, border: "1px solid #E2E8F0",
-              background: "#FFFFFF", color: "#0F172A", fontSize: 12, fontWeight: 800,
+              padding: "12px 20px", borderRadius: 8, border: "1px solid #C4C1B8",
+              background: "#FCFBF9", color: "#161616", fontSize: 12, fontWeight: 800,
               cursor: "pointer", display: "flex", alignItems: "center", gap: 8,
               boxShadow: "0 2px 8px rgba(15,23,42,0.08)"
             }}
           >
-            <Lock size={15} color="#D97706" /> Unlock CERT PDF
+            <Lock size={15} color="#F25C1F" /> Unlock CERT PDF
           </button>
         </div>
       </div>

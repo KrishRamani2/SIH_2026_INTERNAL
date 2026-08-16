@@ -194,15 +194,15 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   // ───────────────────────────────────────────────────────────────────────────
 
   // Top Dark Header Banner
-  doc.setFillColor(15, 23, 42); // #0F172A Deep Navy
+  doc.setFillColor(15, 23, 42); // #161616 Deep Navy
   doc.rect(0, 0, pageWidth, 55, "F");
 
   // Accent line below top banner (Gold/Amber)
-  doc.setFillColor(217, 119, 6); // #D97706
+  doc.setFillColor(217, 119, 6); // #F25C1F
   doc.rect(0, 54, pageWidth, 2, "F");
 
   // Project Logo / Graphic Badge
-  doc.setFillColor(37, 99, 235); // #2563EB Royal Blue
+  doc.setFillColor(37, 99, 235); // #161616 Royal Blue
   doc.roundedRect(16, 14, 26, 26, 3, 3, "F");
   
   // Draw Shield Icon inside badge
@@ -223,7 +223,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
 
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
-  doc.setTextColor(148, 163, 184); // #94A3B8
+  doc.setTextColor(148, 163, 184); // #C4C1B8
   doc.text("NATIONAL CYBER DEFENSE & SOC OPERATIONS PLATFORM", 48, 34);
 
   doc.setFontSize(8);
@@ -296,7 +296,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   });
 
   // Executive Summary Card Box
-  doc.setFillColor(254, 242, 242); // #FEF2F2 Light Red background
+  doc.setFillColor(254, 242, 242); // #F25C1F33 Light Red background
   doc.setDrawColor(254, 202, 202);
   doc.roundedRect(16, 186, pageWidth - 32, 54, 3, 3, "FD");
 

@@ -11,7 +11,7 @@ function AvailStrip() {
     const t = i < 18 ? "healthy" : i < 22 ? "attack" : i < 28 ? "degraded" : "healthy";
     return { t };
   });
-  const colorMap: Record<string, string> = { healthy: "#059669", attack: "#DC2626", degraded: "#D97706" };
+  const colorMap: Record<string, string> = { healthy: "#8E8B82", attack: "#F25C1F", degraded: "#F25C1F" };
   return (
     <div style={{ display: "flex", gap: 1.5, height: 8, marginTop: 6 }}>
       {cells.map((c, i) => (
@@ -29,11 +29,11 @@ function RTOArc({ value = 75 }: { value?: number }) {
   const dash = circ * pct;
   return (
     <svg width={44} height={44} viewBox="0 0 44 44">
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#F1F5F9" strokeWidth={stroke} />
-      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#2563EB" strokeWidth={stroke}
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#EBEAE5" strokeWidth={stroke} />
+      <circle cx={cx} cy={cy} r={r} fill="none" stroke="#161616" strokeWidth={stroke}
         strokeDasharray={`${dash} ${circ}`} strokeLinecap="round"
         transform={`rotate(-90 ${cx} ${cy})`} />
-      <text x={cx} y={cy + 4} textAnchor="middle" fill="#0F172A" fontSize={9} fontWeight="700">{value}s</text>
+      <text x={cx} y={cy + 4} textAnchor="middle" fill="#161616" fontSize={9} fontWeight="700">{value}s</text>
     </svg>
   );
 }
@@ -44,7 +44,7 @@ const kpis = [
     viz: () => (
       <ResponsiveContainer width="100%" height={32}>
         <LineChart data={S(4800, 600)} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
-          <Line type="monotone" dataKey="v" stroke="#2563EB" strokeWidth={1.5} dot={false} />
+          <Line type="monotone" dataKey="v" stroke="#161616" strokeWidth={1.5} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     ),
@@ -54,7 +54,7 @@ const kpis = [
     viz: () => (
       <div style={{ marginTop: 6 }}>
         <div className="progress-track">
-          <div className="progress-fill" style={{ width: "49.7%", background: "#DC2626" }} />
+          <div className="progress-fill" style={{ width: "49.7%", background: "#F25C1F" }} />
         </div>
       </div>
     ),
@@ -64,7 +64,7 @@ const kpis = [
     viz: () => (
       <ResponsiveContainer width="100%" height={32}>
         <BarChart data={Array.from({ length: 8 }, (_, i) => ({ v: 8 + i * 0.8 + Math.random() * 3 }))} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
-          <Bar dataKey="v" fill="#7C3AED" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="v" fill="#161616" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     ),
@@ -80,11 +80,11 @@ const kpis = [
         <AreaChart data={S(2400, 200)} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
           <defs>
             <linearGradient id="legitGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#059669" stopOpacity={0.3} />
-              <stop offset="100%" stopColor="#059669" stopOpacity={0} />
+              <stop offset="0%" stopColor="#8E8B82" stopOpacity={0.3} />
+              <stop offset="100%" stopColor="#8E8B82" stopOpacity={0} />
             </linearGradient>
           </defs>
-          <Area type="monotone" dataKey="v" stroke="#059669" fill="url(#legitGrad)" strokeWidth={1.5} dot={false} />
+          <Area type="monotone" dataKey="v" stroke="#8E8B82" fill="url(#legitGrad)" strokeWidth={1.5} dot={false} />
         </AreaChart>
       </ResponsiveContainer>
     ),
@@ -94,7 +94,7 @@ const kpis = [
     viz: () => (
       <ResponsiveContainer width="100%" height={32}>
         <BarChart data={Array.from({ length: 12 }, (_, i) => ({ v: 100 + Math.random() * 80 }))} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
-          <Bar dataKey="v" fill="#D97706" radius={[2, 2, 0, 0]} />
+          <Bar dataKey="v" fill="#F25C1F" radius={[2, 2, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     ),
@@ -108,7 +108,7 @@ const kpis = [
     viz: () => (
       <ResponsiveContainer width="100%" height={32}>
         <LineChart data={S(16000, 2000)} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
-          <Line type="monotone" dataKey="v" stroke="#DC2626" strokeWidth={1.5} dot={false} />
+          <Line type="monotone" dataKey="v" stroke="#F25C1F" strokeWidth={1.5} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     ),
@@ -121,7 +121,7 @@ export default function KPIStrip() {
       {kpis.map(k => (
         <div key={k.id} className="card" style={{ padding: "14px 16px" }}>
           <div className="label-xs" style={{ marginBottom: 6 }}>{k.label}</div>
-          <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: "-0.02em", color: "#0F172A", lineHeight: 1 }}>
+          <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: "-0.02em", color: "#161616", lineHeight: 1 }}>
             {k.value}
           </div>
           <div style={{ marginTop: 4, marginBottom: 4 }}>
@@ -129,12 +129,12 @@ export default function KPIStrip() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 3, marginTop: 4 }}>
             {k.up
-              ? <TrendingUp size={10} color="#059669" />
-              : <TrendingDown size={10} color="#DC2626" />}
-            <span style={{ fontSize: 11, color: k.up ? "#059669" : "#DC2626", fontWeight: 600 }}>
+              ? <TrendingUp size={10} color="#8E8B82" />
+              : <TrendingDown size={10} color="#F25C1F" />}
+            <span style={{ fontSize: 11, color: k.up ? "#8E8B82" : "#F25C1F", fontWeight: 600 }}>
               {k.delta}
             </span>
-            {k.sub && <span style={{ fontSize: 10, color: "#94A3B8" }}>{k.sub}</span>}
+            {k.sub && <span style={{ fontSize: 10, color: "#C4C1B8" }}>{k.sub}</span>}
           </div>
         </div>
       ))}

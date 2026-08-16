@@ -3,11 +3,11 @@ import { ArrowRight } from "lucide-react";
 
 // Sunburst-style SVG protocol ring
 const protocols = [
-  { name: "HTTP/1.1", pct: 38, color: "#2563EB" },
-  { name: "HTTP/2",   pct: 25, color: "#0284C7" },
-  { name: "UDP Flood",pct: 18, color: "#D97706" },
-  { name: "SYN Flood",pct: 12, color: "#DC2626" },
-  { name: "HTTPS",    pct:  7, color: "#64748B" },
+  { name: "HTTP/1.1", pct: 38, color: "#161616" },
+  { name: "HTTP/2",   pct: 25, color: "#161616" },
+  { name: "UDP Flood",pct: 18, color: "#F25C1F" },
+  { name: "SYN Flood",pct: 12, color: "#F25C1F" },
+  { name: "HTTPS",    pct:  7, color: "#8E8B82" },
 ];
 
 function ProtocolRing() {
@@ -38,8 +38,8 @@ function ProtocolRing() {
       {segments.map(seg => (
         <path key={seg.name} d={seg.d} fill={seg.color} fillOpacity={0.85} />
       ))}
-      <text x={cx} y={cy - 5} textAnchor="middle" fill="#475569" fontSize={8} fontWeight="600" textDecoration="none">Attack</text>
-      <text x={cx} y={cy + 7} textAnchor="middle" fill="#475569" fontSize={8} fontWeight="600">Traffic</text>
+      <text x={cx} y={cy - 5} textAnchor="middle" fill="#8E8B82" fontSize={8} fontWeight="600" textDecoration="none">Attack</text>
+      <text x={cx} y={cy + 7} textAnchor="middle" fill="#8E8B82" fontSize={8} fontWeight="600">Traffic</text>
     </svg>
   );
 }
@@ -47,7 +47,7 @@ function ProtocolRing() {
 export default function ProtocolBreakdown() {
   return (
     <div className="card" style={{ padding: "18px 20px" }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A", marginBottom: 14 }}>Protocol Breakdown</div>
+      <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 14 }}>Protocol Breakdown</div>
       <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
         <ProtocolRing />
         <div style={{ flex: 1 }}>
@@ -55,14 +55,14 @@ export default function ProtocolBreakdown() {
             <div key={p.name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: p.color, flexShrink: 0 }} />
-                <span style={{ fontSize: 11, color: "#475569" }}>{p.name}</span>
+                <span style={{ fontSize: 11, color: "#8E8B82" }}>{p.name}</span>
               </div>
               <span style={{ fontSize: 11, fontWeight: 700, color: p.color }}>{p.pct}%</span>
             </div>
           ))}
         </div>
       </div>
-      <button style={{ marginTop: 8, fontSize: 11, color: "#2563EB", background: "none", border: "none", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", gap: 3 }}>
+      <button style={{ marginTop: 8, fontSize: 11, color: "#161616", background: "none", border: "none", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", gap: 3 }}>
         View All Protocols <ArrowRight size={11} />
       </button>
     </div>

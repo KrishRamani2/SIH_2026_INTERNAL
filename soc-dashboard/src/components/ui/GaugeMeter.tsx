@@ -12,7 +12,7 @@ interface GaugeProps {
 export default function GaugeMeter({
   value,
   max = 100,
-  color = "#06b6d4",
+  color = "#161616",
   label,
   size = 120,
   thickness = 12,
@@ -72,7 +72,7 @@ export default function GaugeMeter({
           x={cx}
           y={cy + 8}
           textAnchor="middle"
-          fill="#e2e8f0"
+          fill="#C4C1B8"
           fontSize={size * 0.18}
           fontWeight="700"
           fontFamily="Inter, sans-serif"
@@ -81,7 +81,7 @@ export default function GaugeMeter({
         </text>
       </svg>
       {label && (
-        <span style={{ fontSize: "0.65rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
+        <span style={{ fontSize: "0.65rem", color: "#C4C1B8", textTransform: "uppercase", letterSpacing: "0.1em", fontWeight: 600 }}>
           {label}
         </span>
       )}

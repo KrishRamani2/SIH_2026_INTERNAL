@@ -18,9 +18,9 @@ const AttackLogsTab = dynamic(() => import("@/components/tabs/AttackLogsTab"), {
 
 function LoadingTab() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 280, color: "#94A3B8", fontSize: 13 }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 280, color: "#C4C1B8", fontSize: 13 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 28, height: 28, border: "2px solid #2563EB", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
+        <div style={{ width: 28, height: 28, border: "2px solid #161616", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
         Loading Aegis-Bharat analytics...
       </div>
     </div>
@@ -60,7 +60,7 @@ export default function Dashboard() {
 
       {/* ─── Header ─────────────────────────────────────────── */}
       <header style={{
-        background: "#FFFFFF",
+        background: "#FCFBF9",
         borderBottom: "1px solid var(--border)",
         boxShadow: "var(--shadow-xs)",
         position: "sticky",
@@ -75,19 +75,19 @@ export default function Dashboard() {
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <div style={{
               width: 32, height: 32, borderRadius: 8,
-              background: "linear-gradient(135deg, #0F172A, #2563EB)",
+              background: "linear-gradient(135deg, #161616, #161616)",
               display: "flex", alignItems: "center", justifyContent: "center",
               boxShadow: "0 2px 6px rgba(37,99,235,0.25)",
               flexShrink: 0,
             }}>
-              <Shield size={18} color="#F59E0B" strokeWidth={2.2} />
+              <Shield size={18} color="#F25C1F" strokeWidth={2.2} />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 16, fontWeight: 800, color: "#0F172A", letterSpacing: "-0.02em" }}>Aegis-Bharat</span>
-              <span style={{ fontSize: 10, fontWeight: 700, color: "#2563EB", background: "#EFF6FF", padding: "1px 6px", borderRadius: 4, border: "1px solid #DBEAFE" }}>
+              <span style={{ fontSize: 16, fontWeight: 800, color: "#161616", letterSpacing: "-0.02em" }}>Aegis-Bharat</span>
+              <span style={{ fontSize: 10, fontWeight: 700, color: "#161616", background: "#EBEAE5", padding: "1px 6px", borderRadius: 4, border: "1px solid #C4C1B8" }}>
                 v2.1
               </span>
-              <span style={{ fontSize: 9, fontWeight: 700, color: "#059669", background: "#ECFDF5", padding: "1px 5px", borderRadius: 4, border: "1px solid #A7F3D0" }}>
+              <span style={{ fontSize: 9, fontWeight: 700, color: "#8E8B82", background: "#EBEAE5", padding: "1px 5px", borderRadius: 4, border: "1px solid #C4C1B8" }}>
                 CERT-In
               </span>
             </div>
@@ -114,7 +114,7 @@ export default function Dashboard() {
               padding: "4px 10px", borderRadius: 6,
               background: "var(--bg-subtle)", border: "1px solid var(--border)"
             }}>
-              <span className="dot-pulse" style={{ background: "#059669", width: 6, height: 6 }} />
+              <span className="dot-pulse" style={{ background: "#8E8B82", width: 6, height: 6 }} />
               <span style={{ fontSize: 11, fontWeight: 600, color: "var(--text-secondary)" }}>Live</span>
               <span className="mono" style={{ fontSize: 11, color: "var(--text-muted)", marginLeft: 2 }}>{time}</span>
             </div>
@@ -122,13 +122,13 @@ export default function Dashboard() {
             {/* Status pill */}
             {status === "attack" && (
               <span className="pill pill-red">
-                <span className="dot-pulse" style={{ background: "#DC2626" }} />
+                <span className="dot-pulse" style={{ background: "#F25C1F" }} />
                 UNDER ATTACK
               </span>
             )}
             {status === "healthy" && (
               <span className="pill pill-green">
-                <span className="dot-pulse" style={{ background: "#059669" }} />
+                <span className="dot-pulse" style={{ background: "#8E8B82" }} />
                 SYSTEMS NORMAL
               </span>
             )}
@@ -140,14 +140,14 @@ export default function Dashboard() {
               style={{
                 display: "flex", alignItems: "center", gap: 6,
                 padding: "6px 12px", borderRadius: 7,
-                background: "#0F172A",
-                color: "#FFFFFF", border: "1px solid #1E293B",
+                background: "#161616",
+                color: "#FCFBF9", border: "1px solid #161616",
                 fontSize: 11, fontWeight: 600, cursor: "pointer",
                 boxShadow: "0 1px 3px rgba(15,23,42,0.12)",
                 transition: "background 0.15s ease"
               }}
             >
-              <Download size={13} color="#F59E0B" /> Export Report
+              <Download size={13} color="#F25C1F" /> Export Report
             </button>
 
             {/* Icon buttons */}
@@ -158,7 +158,7 @@ export default function Dashboard() {
               <button key={i} title={title} className="icon-btn" style={{ position: "relative" }}>
                 <Icon size={15} />
                 {badge && (
-                  <span style={{ position: "absolute", top: 4, right: 4, width: 6, height: 6, borderRadius: "50%", background: "#DC2626", border: "1.5px solid white" }} />
+                  <span style={{ position: "absolute", top: 4, right: 4, width: 6, height: 6, borderRadius: "50%", background: "#F25C1F", border: "1.5px solid white" }} />
                 )}
               </button>
             ))}
@@ -167,9 +167,9 @@ export default function Dashboard() {
               onClick={() => setDemoMode(d => !d)}
               style={{
                 padding: "5px 10px", borderRadius: 6,
-                border: `1px solid ${demoMode ? "#2563EB" : "var(--border)"}`,
-                background: demoMode ? "#EFF6FF" : "white",
-                color: demoMode ? "#2563EB" : "var(--text-secondary)",
+                border: `1px solid ${demoMode ? "#161616" : "var(--border)"}`,
+                background: demoMode ? "#EBEAE5" : "white",
+                color: demoMode ? "#161616" : "var(--text-secondary)",
                 fontSize: 11, fontWeight: 600, cursor: "pointer",
               }}
             >
@@ -193,7 +193,7 @@ export default function Dashboard() {
       <footer style={{
         padding: "10px 24px",
         borderTop: "1px solid var(--border)",
-        background: "#FFFFFF",
+        background: "#FCFBF9",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -201,12 +201,12 @@ export default function Dashboard() {
         color: "var(--text-muted)",
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <Shield size={14} color="#2563EB" />
-          <span style={{ fontWeight: 600, color: "#0F172A" }}>Aegis-Bharat SOC Platform</span>
+          <Shield size={14} color="#161616" />
+          <span style={{ fontWeight: 600, color: "#161616" }}>Aegis-Bharat SOC Platform</span>
           <span>· SIH 2026 · Team Quantum Defenders</span>
         </div>
-        <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#059669", fontWeight: 600 }}>
-          <Circle size={7} fill="#059669" strokeWidth={0} /> All defense sub-systems operational &amp; CERT-In compliant
+        <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#8E8B82", fontWeight: 600 }}>
+          <Circle size={7} fill="#8E8B82" strokeWidth={0} /> All defense sub-systems operational &amp; CERT-In compliant
         </span>
       </footer>
 

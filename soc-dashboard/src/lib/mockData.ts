@@ -137,21 +137,21 @@ export const topTalkers: TopTalker[] = [
 
 // ── Protocol breakdown ────────────────────────────────────────────────────────
 export const protocolData: ProtocolBreakdown[] = [
-  { name: "HTTP/1.1", value: 38, color: "#06b6d4" },
-  { name: "HTTP/2", value: 25, color: "#8b5cf6" },
-  { name: "UDP Flood", value: 18, color: "#f59e0b" },
-  { name: "SYN Flood", value: 12, color: "#ef4444" },
-  { name: "HTTPS", value: 7, color: "#10b981" },
+  { name: "HTTP/1.1", value: 38, color: "#161616" },
+  { name: "HTTP/2", value: 25, color: "#161616" },
+  { name: "UDP Flood", value: 18, color: "#F25C1F" },
+  { name: "SYN Flood", value: 12, color: "#F25C1F" },
+  { name: "HTTPS", value: 7, color: "#8E8B82" },
 ];
 
 // ── OS Fingerprint ────────────────────────────────────────────────────────────
 export const osFingerprintData: OSFingerprint[] = [
-  { name: "Linux-Mirai", value: 42, color: "#ef4444" },
-  { name: "Windows", value: 28, color: "#06b6d4" },
+  { name: "Linux-Mirai", value: 42, color: "#F25C1F" },
+  { name: "Windows", value: 28, color: "#161616" },
   { name: "Unknown", value: 15, color: "#6b7280" },
-  { name: "IoT", value: 9, color: "#f59e0b" },
-  { name: "Mobile", value: 4, color: "#8b5cf6" },
-  { name: "macOS", value: 2, color: "#10b981" },
+  { name: "IoT", value: 9, color: "#F25C1F" },
+  { name: "Mobile", value: 4, color: "#161616" },
+  { name: "macOS", value: 2, color: "#8E8B82" },
 ];
 
 // ── Attack confidence over time ───────────────────────────────────────────────
@@ -193,11 +193,11 @@ export const attackNarrative: AttackEvent[] = [
 
 // ── Recovery timeline ─────────────────────────────────────────────────────────
 export const recoveryTimeline: RecoveryEvent[] = [
-  { label: "Detection", start: 0, duration: 12, color: "#f59e0b", description: "ML model triggered, anomaly confirmed" },
-  { label: "First Mitigation", start: 12, duration: 8, color: "#06b6d4", description: "WAF rules pushed, geo-blocking active" },
-  { label: "Peak Block", start: 20, duration: 25, color: "#ef4444", description: "Max traffic — 51% blocked" },
-  { label: "Attack Subsiding", start: 45, duration: 18, color: "#8b5cf6", description: "Bot nets rotating, IPs shifting" },
-  { label: "Full Recovery", start: 63, duration: 12, color: "#10b981", description: "Normal traffic restored, rules relaxed" },
+  { label: "Detection", start: 0, duration: 12, color: "#F25C1F", description: "ML model triggered, anomaly confirmed" },
+  { label: "First Mitigation", start: 12, duration: 8, color: "#161616", description: "WAF rules pushed, geo-blocking active" },
+  { label: "Peak Block", start: 20, duration: 25, color: "#F25C1F", description: "Max traffic — 51% blocked" },
+  { label: "Attack Subsiding", start: 45, duration: 18, color: "#161616", description: "Bot nets rotating, IPs shifting" },
+  { label: "Full Recovery", start: 63, duration: 12, color: "#8E8B82", description: "Normal traffic restored, rules relaxed" },
 ];
 
 // ── RTO history ───────────────────────────────────────────────────────────────
@@ -212,13 +212,13 @@ export const rtoHistory = [
 
 // ── ASN Treemap data ──────────────────────────────────────────────────────────
 export const asnData = [
-  { name: "AS4134 China Telecom", size: 18420, fill: "#ef4444" },
-  { name: "AS8075 Microsoft", size: 12340, fill: "#06b6d4" },
-  { name: "AS16509 Amazon AWS", size: 8901, fill: "#f59e0b" },
-  { name: "AS13335 Cloudflare", size: 6540, fill: "#8b5cf6" },
-  { name: "AS4837 China Unicom", size: 5210, fill: "#ef4444" },
-  { name: "AS3320 Deutsche Telekom", size: 4100, fill: "#10b981" },
-  { name: "AS1299 Telia", size: 3870, fill: "#06b6d4" },
+  { name: "AS4134 China Telecom", size: 18420, fill: "#F25C1F" },
+  { name: "AS8075 Microsoft", size: 12340, fill: "#161616" },
+  { name: "AS16509 Amazon AWS", size: 8901, fill: "#F25C1F" },
+  { name: "AS13335 Cloudflare", size: 6540, fill: "#161616" },
+  { name: "AS4837 China Unicom", size: 5210, fill: "#F25C1F" },
+  { name: "AS3320 Deutsche Telekom", size: 4100, fill: "#8E8B82" },
+  { name: "AS1299 Telia", size: 3870, fill: "#161616" },
   { name: "AS6939 Hurricane Electric", size: 3200, fill: "#6b7280" },
 ];
 

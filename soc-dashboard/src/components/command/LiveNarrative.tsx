@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { AlertTriangle, Cpu, Shield, Zap, CheckCircle, Activity } from "lucide-react";
 
 const EVENTS = [
-  { time: "16:48:22", icon: AlertTriangle, color: "#DC2626", bg: "#FEF2F2", title: "Attack Detected", sub: "Traffic spike 340% above baseline", conf: "91%" },
-  { time: "16:48:28", icon: Cpu,           color: "#D97706", bg: "#FFFBEB", title: "ML Classification", sub: "SYN flood pattern matched", conf: "94%" },
-  { time: "16:48:51", icon: Shield,        color: "#D97706", bg: "#FFFBEB", title: "WAF Rule Triggered", sub: "Rule #4421 activated", conf: "Block initiated" },
-  { time: "16:49:02", icon: Zap,           color: "#DC2626", bg: "#FEF2F2", title: "Traffic Blocked", sub: "Malicious traffic blocked", conf: "49.7% of total" },
-  { time: "16:49:18", icon: Activity,      color: "#059669", bg: "#ECFDF5", title: "Mitigation Deployed", sub: "Adaptive mitigation deployed across edge nodes", conf: "—" },
-  { time: "16:50:10", icon: CheckCircle,   color: "#2563EB", bg: "#EFF6FF", title: "System Stabilized", sub: "Traffic normalizing. Monitoring continues", conf: "—" },
+  { time: "16:48:22", icon: AlertTriangle, color: "#F25C1F", bg: "#F25C1F33", title: "Attack Detected", sub: "Traffic spike 340% above baseline", conf: "91%" },
+  { time: "16:48:28", icon: Cpu,           color: "#F25C1F", bg: "#F25C1F33", title: "ML Classification", sub: "SYN flood pattern matched", conf: "94%" },
+  { time: "16:48:51", icon: Shield,        color: "#F25C1F", bg: "#F25C1F33", title: "WAF Rule Triggered", sub: "Rule #4421 activated", conf: "Block initiated" },
+  { time: "16:49:02", icon: Zap,           color: "#F25C1F", bg: "#F25C1F33", title: "Traffic Blocked", sub: "Malicious traffic blocked", conf: "49.7% of total" },
+  { time: "16:49:18", icon: Activity,      color: "#8E8B82", bg: "#EBEAE5", title: "Mitigation Deployed", sub: "Adaptive mitigation deployed across edge nodes", conf: "—" },
+  { time: "16:50:10", icon: CheckCircle,   color: "#161616", bg: "#EBEAE5", title: "System Stabilized", sub: "Traffic normalizing. Monitoring continues", conf: "—" },
 ];
 
 export default function LiveNarrative() {
@@ -22,9 +22,9 @@ export default function LiveNarrative() {
   return (
     <div className="card" style={{ padding: "18px 20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-        <div style={{ fontSize: 13, fontWeight: 600, color: "#0F172A" }}>Live Attack Narrative</div>
-        <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#059669", fontWeight: 600 }}>
-          <span className="dot-pulse" style={{ background: "#059669", width: 6, height: 6 }} />
+        <div style={{ fontSize: 13, fontWeight: 600, color: "#161616" }}>Live Attack Narrative</div>
+        <span style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 11, color: "#8E8B82", fontWeight: 600 }}>
+          <span className="dot-pulse" style={{ background: "#8E8B82", width: 6, height: 6 }} />
           Live
         </span>
       </div>
@@ -42,7 +42,7 @@ export default function LiveNarrative() {
                 <div style={{
                   width: 40, height: 40, borderRadius: "50%",
                   background: ev.bg,
-                  border: `2px solid ${isActive ? ev.color : "#CBD5E1"}`,
+                  border: `2px solid ${isActive ? ev.color : "#A8A49B"}`,
                   display: "flex", alignItems: "center", justifyContent: "center",
                   boxShadow: isActive ? `0 0 0 4px ${ev.color}25` : "0 1px 3px rgba(0,0,0,0.05)",
                   transition: "all 0.3s",
@@ -52,11 +52,11 @@ export default function LiveNarrative() {
                   <Icon size={18} color={ev.color} />
                 </div>
                 {/* Time */}
-                <div style={{ fontSize: 10, color: "#94A3B8", marginTop: 8, fontFamily: "monospace", fontWeight: 600 }}>{ev.time}</div>
+                <div style={{ fontSize: 10, color: "#C4C1B8", marginTop: 8, fontFamily: "monospace", fontWeight: 600 }}>{ev.time}</div>
                 {/* Title */}
-                <div style={{ fontSize: 11, fontWeight: 700, color: "#0F172A", marginTop: 3, textAlign: "center", lineHeight: 1.3 }}>{ev.title}</div>
+                <div style={{ fontSize: 11, fontWeight: 700, color: "#161616", marginTop: 3, textAlign: "center", lineHeight: 1.3 }}>{ev.title}</div>
                 {/* Sub */}
-                <div style={{ fontSize: 10, color: "#475569", marginTop: 3, textAlign: "center", lineHeight: 1.3, maxWidth: 160 }}>{ev.sub}</div>
+                <div style={{ fontSize: 10, color: "#8E8B82", marginTop: 3, textAlign: "center", lineHeight: 1.3, maxWidth: 160 }}>{ev.sub}</div>
                 {/* Confidence / Status pill */}
                 {ev.conf !== "—" && (
                   <div style={{
@@ -79,7 +79,7 @@ export default function LiveNarrative() {
                   marginTop: 19,
                   background: i < highlight
                     ? `linear-gradient(90deg, ${EVENTS[i].color}, ${EVENTS[i+1].color})`
-                    : "#E2E8F0",
+                    : "#C4C1B8",
                   transition: "background 0.5s",
                   alignSelf: "flex-start"
                 }} />
