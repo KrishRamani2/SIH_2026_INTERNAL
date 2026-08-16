@@ -38,28 +38,30 @@ const TooltipContent = ({ active, payload }: any) => {
 
 export default function ThreatMatrix() {
   return (
-    <div className="card" style={{ padding: "18px 20px" }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 4 }}>Threat Severity Matrix</div>
-      <div style={{ fontSize: 10, color: "#C4C1B8", marginBottom: 12 }}>X=Volume · Y=Severity · Size=Requests</div>
-      <ResponsiveContainer width="100%" height={200}>
-        <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 0 }}>
-          <CartesianGrid strokeDasharray="0" stroke="#EBEAE5" />
-          <XAxis type="number" dataKey="x" domain={[0, 100]} tick={{ fill: "#C4C1B8", fontSize: 9 }} tickLine={false} axisLine={false} label={{ value: "Traffic Volume", fill: "#C4C1B8", fontSize: 9, position: "insideBottom", offset: -8 }} />
-          <YAxis type="number" dataKey="y" domain={[0, 100]} tick={{ fill: "#C4C1B8", fontSize: 9 }} tickLine={false} axisLine={false} width={28} label={{ value: "Severity", fill: "#C4C1B8", fontSize: 9, angle: -90, position: "insideLeft" }} />
-          <ZAxis type="number" dataKey="z" range={[100, 1000]} />
-          <Tooltip content={<TooltipContent />} />
-          <Scatter data={threats} shape={<CustomDot />}>
-            {threats.map((t, i) => <Cell key={i} fill={t.color} />)}
-          </Scatter>
-        </ScatterChart>
-      </ResponsiveContainer>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
-        {threats.map(t => (
-          <span key={t.name} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 10, color: "#8E8B82" }}>
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: t.color, display: "inline-block" }} />
-            {t.name}
-          </span>
-        ))}
+    <div className="card" style={{ padding: "18px 20px", display: "flex", flexDirection: "column", height: "100%", justifyContent: "space-between" }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 4 }}>Threat Severity Matrix</div>
+        <div style={{ fontSize: 10, color: "#C4C1B8", marginBottom: 12 }}>X=Volume · Y=Severity · Size=Requests</div>
+        <ResponsiveContainer width="100%" height={200}>
+          <ScatterChart margin={{ top: 10, right: 10, bottom: 10, left: 20 }}>
+            <CartesianGrid strokeDasharray="0" stroke="#EBEAE5" />
+            <XAxis type="number" dataKey="x" domain={[0, 100]} tick={{ fill: "#C4C1B8", fontSize: 9 }} tickLine={false} axisLine={false} label={{ value: "Traffic Volume", fill: "#C4C1B8", fontSize: 9, position: "insideBottom", offset: -8 }} />
+            <YAxis type="number" dataKey="y" domain={[0, 100]} tick={{ fill: "#C4C1B8", fontSize: 9 }} tickLine={false} axisLine={false} width={28} label={{ value: "Severity", fill: "#C4C1B8", fontSize: 9, angle: -90, position: "insideLeft" }} />
+            <ZAxis type="number" dataKey="z" range={[100, 1000]} />
+            <Tooltip content={<TooltipContent />} />
+            <Scatter data={threats} shape={<CustomDot />}>
+              {threats.map((t, i) => <Cell key={i} fill={t.color} />)}
+            </Scatter>
+          </ScatterChart>
+        </ResponsiveContainer>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 8 }}>
+          {threats.map(t => (
+            <span key={t.name} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 10, color: "#8E8B82" }}>
+              <span style={{ width: 7, height: 7, borderRadius: "50%", background: t.color, display: "inline-block" }} />
+              {t.name}
+            </span>
+          ))}
+        </div>
       </div>
       <button style={{ marginTop: 8, fontSize: 11, color: "#161616", background: "none", border: "none", cursor: "pointer", fontWeight: 500, display: "flex", alignItems: "center", gap: 3 }}>
         View Full Matrix <ArrowRight size={11} />

@@ -11,7 +11,6 @@ import { generatePdfReport } from "@/lib/pdfReportGenerator";
 
 const CommandCenter = dynamic(() => import("@/components/tabs/CommandCenter"), { ssr: false, loading: () => <LoadingTab /> });
 const AttackIntelligence = dynamic(() => import("@/components/tabs/AttackIntelligence"), { ssr: false, loading: () => <LoadingTab /> });
-const PredictiveTab = dynamic(() => import("@/components/tabs/PredictiveTab"), { ssr: false, loading: () => <LoadingTab /> });
 const OSAnalyticsTab = dynamic(() => import("@/components/tabs/OSAnalyticsTab"), { ssr: false, loading: () => <LoadingTab /> });
 const ComplianceTab = dynamic(() => import("@/components/tabs/ComplianceTab"), { ssr: false, loading: () => <LoadingTab /> });
 const AttackLogsTab = dynamic(() => import("@/components/tabs/AttackLogsTab"), { ssr: false, loading: () => <LoadingTab /> });
@@ -21,7 +20,7 @@ function LoadingTab() {
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: 280, color: "#C4C1B8", fontSize: 13 }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
         <div style={{ width: 28, height: 28, border: "2px solid #161616", borderTopColor: "transparent", borderRadius: "50%", animation: "spin 0.8s linear infinite" }} />
-        Loading Aegis-Bharat analytics...
+        Loading Trishul analytics...
       </div>
     </div>
   );
@@ -30,7 +29,6 @@ function LoadingTab() {
 const tabs = [
   { id: "command",      label: "Command Center", icon: Monitor     },
   { id: "intelligence", label: "Intel",          icon: Brain       },
-  { id: "predictive",   label: "Forecast",       icon: Activity    },
   { id: "os",           label: "OS Analytics",   icon: BarChart2   },
   { id: "compliance",   label: "Compliance & CERT", icon: FileCheck },
   { id: "logs",         label: "Attack Logs",    icon: ShieldAlert },
@@ -83,7 +81,7 @@ export default function Dashboard() {
               <Shield size={18} color="#F25C1F" strokeWidth={2.2} />
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <span style={{ fontSize: 16, fontWeight: 800, color: "#161616", letterSpacing: "-0.02em" }}>Aegis-Bharat</span>
+              <span style={{ fontSize: 16, fontWeight: 800, color: "#161616", letterSpacing: "-0.02em" }}>Trishul</span>
               <span style={{ fontSize: 10, fontWeight: 700, color: "#161616", background: "#EBEAE5", padding: "1px 6px", borderRadius: 4, border: "1px solid #C4C1B8" }}>
                 v2.1
               </span>
@@ -183,7 +181,6 @@ export default function Dashboard() {
       <main style={{ flex: 1, padding: "20px 24px", overflowX: "hidden" }}>
         {activeTab === "command"      && <CommandCenter />}
         {activeTab === "intelligence" && <AttackIntelligence />}
-        {activeTab === "predictive"   && <PredictiveTab />}
         {activeTab === "os"           && <OSAnalyticsTab />}
         {activeTab === "compliance"   && <ComplianceTab />}
         {activeTab === "logs"         && <AttackLogsTab />}
@@ -202,7 +199,7 @@ export default function Dashboard() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <Shield size={14} color="#161616" />
-          <span style={{ fontWeight: 600, color: "#161616" }}>Aegis-Bharat SOC Platform</span>
+          <span style={{ fontWeight: 600, color: "#161616" }}>Trishul SOC Platform</span>
           <span>· SIH 2026 · Team Quantum Defenders</span>
         </div>
         <span style={{ display: "flex", alignItems: "center", gap: 6, color: "#8E8B82", fontWeight: 600 }}>

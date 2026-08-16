@@ -53,39 +53,25 @@ function MetricRow({ label, value, pct, color, target, sub }: MetricRowProps) {
 
 export default function SecurityHealth() {
   return (
-    <div className="card" style={{ padding: "18px 20px" }}>
-      <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 4 }}>Security Health</div>
-      <MetricRow
-        label="Attack Confidence"
-        value="94%"
-        pct={94}
-        color="#F25C1F"
-        target="80%"
-        sub="High confidence malicious activity detected"
-      />
-      <MetricRow
-        label="Mitigation Efficiency"
-        value="50%"
-        pct={50}
-        color="#F25C1F"
-        target="80%"
-        sub="Traffic mitigation in progress"
-      />
-      <div style={{ padding: "14px 0" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-          <div>
-            <div style={{ fontSize: 24, fontWeight: 700, color: "#161616", letterSpacing: "-0.02em", lineHeight: 1 }}>99.2%</div>
-            <div style={{ fontSize: 11, color: "#8E8B82", marginTop: 3 }}>System Availability</div>
-            <div style={{ fontSize: 10, color: "#C4C1B8", marginTop: 1 }}>All systems operational</div>
-          </div>
-          <SemiGauge value={99.2} color="#8E8B82" size={90} />
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <div style={{ flex: 1, height: 5, borderRadius: 99, background: "#EBEAE5", overflow: "hidden" }}>
-            <div style={{ width: "99.2%", height: "100%", borderRadius: 99, background: "#8E8B82" }} />
-          </div>
-          <span style={{ fontSize: 10, color: "#C4C1B8", whiteSpace: "nowrap" }}>Target: 99%</span>
-        </div>
+    <div className="card" style={{ padding: "18px 20px", display: "flex", flexDirection: "column", justifyContent: "space-between", height: "100%" }}>
+      <div>
+        <div style={{ fontSize: 13, fontWeight: 600, color: "#161616", marginBottom: 4 }}>Security Health</div>
+        <MetricRow
+          label="Attack Confidence"
+          value="94%"
+          pct={94}
+          color="#F25C1F"
+          target="80%"
+          sub="High confidence malicious activity detected"
+        />
+        <MetricRow
+          label="Mitigation Efficiency"
+          value="50%"
+          pct={50}
+          color="#F25C1F"
+          target="80%"
+          sub="Traffic mitigation in progress"
+        />
       </div>
     </div>
   );

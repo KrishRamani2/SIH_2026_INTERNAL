@@ -219,7 +219,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setTextColor(255, 255, 255);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(22);
-  doc.text("AEGIS-BHARAT", 48, 26);
+  doc.text("TRISHUL", 48, 26);
 
   doc.setFontSize(10);
   doc.setFont("helvetica", "normal");
@@ -263,10 +263,10 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.line(22, 123, pageWidth - 22, 123);
 
   const metaData = [
-    ["Project Name:", "Aegis-Bharat SOC Platform", "Classification:", "CONFIDENTIAL // RESTRICTED"],
+    ["Project Name:", "Trishul SOC Platform", "Classification:", "CONFIDENTIAL // RESTRICTED"],
     ["Report ID:", reportId, "Target Scope:", "Sovereign Infrastructure Scope"],
     ["Generated On:", reportDate, "CERT-In Filing:", "INC-2026-0815-001 (Active)"],
-    ["SOC Engine:", "Aegis-Bharat ML Core v2.1", "Threat Level:", "CRITICAL (Under Mitigation)"],
+    ["SOC Engine:", "Trishul ML Core v2.1", "Threat Level:", "CRITICAL (Under Mitigation)"],
   ];
 
   let metaY = 131;
@@ -310,7 +310,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setTextColor(51, 65, 85);
 
   const summaryText = [
-    "Aegis-Bharat SOC Platform detected a major coordinated DDoS attack pattern initiating at 16:48 IST.",
+    "Trishul SOC Platform detected a major coordinated DDoS attack pattern initiating at 16:48 IST.",
     "Peak traffic volume reached 8,225 RPS (340% above historical baseline) driven by Linux-Mirai botnets.",
     "Autonomous WAF & rate-limiting rules blocked 51% of malicious ingress traffic while preserving 99.2% clean RPS.",
     "CERT-In statutory notification #INC-2026-0815-001 has been triggered in compliance with Indian IT Act directives."
@@ -332,13 +332,13 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setTextColor(5, 150, 105);
   doc.text("CERT-In AUDITED", pageWidth - 64, 256);
   doc.setFontSize(7);
-  doc.text("AEGIS-BHARAT VERIFIED", pageWidth - 64, 262);
+  doc.text("TRISHUL VERIFIED", pageWidth - 64, 262);
 
   // Footer on cover page
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
-  doc.text("Aegis-Bharat Cyber Security Operations Center · Page 1 of 3", 16, pageHeight - 12);
+  doc.text("Trishul Cyber Security Operations Center · Page 1 of 3", 16, pageHeight - 12);
   doc.text("CONFIDENTIAL & PROPRIETARY", pageWidth - 60, pageHeight - 12);
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -355,7 +355,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(255, 255, 255);
-  doc.text("AEGIS-BHARAT SOC PLATFORM", 16, 12);
+  doc.text("TRISHUL SOC PLATFORM", 16, 12);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(148, 163, 184);
   doc.text(`|  ${currentTabInfo.title}`, 68, 12);
@@ -526,7 +526,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
-  doc.text("Aegis-Bharat Cyber Security Operations Center · Page 2 of 3", 16, pageHeight - 12);
+  doc.text("Trishul Cyber Security Operations Center · Page 2 of 3", 16, pageHeight - 12);
   doc.text("CONFIDENTIAL & PROPRIETARY", pageWidth - 60, pageHeight - 12);
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -543,7 +543,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setFont("helvetica", "bold");
   doc.setFontSize(9);
   doc.setTextColor(255, 255, 255);
-  doc.text("AEGIS-BHARAT SOC PLATFORM", 16, 12);
+  doc.text("TRISHUL SOC PLATFORM", 16, 12);
   doc.setFont("helvetica", "normal");
   doc.setTextColor(148, 163, 184);
   doc.text("|  CERT-In Statutory Incident Audit & Approval Log", 68, 12);
@@ -586,7 +586,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8.5);
   doc.setTextColor(51, 65, 85);
-  doc.text("This incident report has been generated automatically by Aegis-Bharat in accordance with Section 70B", 22, startY + 17);
+  doc.text("This incident report has been generated automatically by Trishul in accordance with Section 70B", 22, startY + 17);
   doc.text("of the Information Technology Act, 2000 and CERT-In Cyber Security Directions 2026. All attack log", 22, startY + 23);
   doc.text("telemetry, IP fingerprints, and mitigation metrics are cryptographically hashed and archived.", 22, startY + 29);
   doc.text("Official Reference: CERT-In Mandatory Incident Filing #INC-2026-0815-001.", 22, startY + 35);
@@ -610,7 +610,7 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   // Signature Left
   doc.line(16, startY + 18, 76, startY + 18);
   doc.text("Lead SOC Incident Analyst", 16, startY + 23);
-  doc.text("Aegis-Bharat Defense Operations", 16, startY + 28);
+  doc.text("Trishul Defense Operations", 16, startY + 28);
 
   // Signature Center
   doc.line(86, startY + 18, 146, startY + 18);
@@ -626,10 +626,10 @@ export function generatePdfReport(tabId: string = "command", attackLogsData: Att
   doc.setFont("helvetica", "normal");
   doc.setFontSize(8);
   doc.setTextColor(148, 163, 184);
-  doc.text("Aegis-Bharat Cyber Security Operations Center · Page 3 of 3", 16, pageHeight - 12);
+  doc.text("Trishul Cyber Security Operations Center · Page 3 of 3", 16, pageHeight - 12);
   doc.text("CONFIDENTIAL & PROPRIETARY", pageWidth - 60, pageHeight - 12);
 
   // Save the generated PDF
   const cleanTabName = tabId.charAt(0).toUpperCase() + tabId.slice(1);
-  doc.save(`Aegis-Bharat_Report_${cleanTabName}_${new Date().toISOString().slice(0, 10)}.pdf`);
+  doc.save(`Trishul_Report_${cleanTabName}_${new Date().toISOString().slice(0, 10)}.pdf`);
 }

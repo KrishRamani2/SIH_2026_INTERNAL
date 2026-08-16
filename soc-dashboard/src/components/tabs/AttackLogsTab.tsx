@@ -684,10 +684,10 @@ export default function AttackLogsTab() {
               CERT-IN STATUTORY COMPLIANCE DIRECTIVE
             </div>
             <div style={{ fontSize: 15, fontWeight: 800, color: "#161616", marginTop: 2 }}>
-              Aegis-Bharat Automated Audit Report Available
+              Trishul Automated Audit Report Available
             </div>
             <div style={{ fontSize: 11, color: "#8E8B82", marginTop: 2 }}>
-              Includes branded Aegis-Bharat cover page, executive threat summary, logs matrix, and CISO approval signature blocks.
+              Includes branded Trishul cover page, executive threat summary, logs matrix, and CISO approval signature blocks.
             </div>
             <button
               onClick={handleExportPdf}

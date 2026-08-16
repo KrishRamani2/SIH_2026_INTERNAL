@@ -6,8 +6,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "sw
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Aegis-Bharat SOC | Sovereign Cyber Defense & CERT-In Compliance Platform — SIH 2026",
-  description: "Real-time DDoS detection, attack logs telemetry, CERT-In statutory compliance reporting, ML-powered OS fingerprinting & traffic forecasting. SIH 2026.",
+  title: "Trishul SOC | Sovereign Cyber Defense & CERT-In Compliance Platform — SIH 2026",
+  description: "Real-time DDoS detection, attack logs telemetry, CERT-In statutory compliance reporting, ML-powered OS fingerprinting & traffic telemetry. SIH 2026.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

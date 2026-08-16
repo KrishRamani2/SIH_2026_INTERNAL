@@ -6,6 +6,7 @@ import KPIStrip               from "@/components/command/KPIStrip";
 import TrafficChart            from "@/components/command/TrafficChart";
 import SecurityHealth          from "@/components/command/SecurityHealth";
 import GeoPanel                from "@/components/command/GeoPanel";
+import TopOrigins            from "@/components/command/TopOrigins";
 import TopTalkers              from "@/components/command/TopTalkers";
 import ProtocolBreakdown       from "@/components/command/ProtocolBreakdown";
 import ThreatMatrix            from "@/components/command/ThreatMatrix";
@@ -37,15 +38,16 @@ export default function CommandCenter() {
       {/* Row 1 — KPI Strip */}
       <KPIStrip />
 
-      {/* Row 2 — Traffic Timeline + Security Health */}
+      {/* Row 2 — Traffic Timeline + Geographic Attack Sources + Top Origins */}
       <div className="grid-main">
         <TrafficChart data={traffic} />
-        <SecurityHealth />
+        <GeoPanel />
+        <TopOrigins />
       </div>
 
-      {/* Row 3 — Geo Map + Top Talkers + Protocol + Threat Matrix */}
+      {/* Row 3 — Security Health + Top Talkers + Protocol + Threat Matrix */}
       <div className="grid-4col">
-        <GeoPanel />
+        <SecurityHealth />
         <TopTalkers />
         <ProtocolBreakdown />
         <ThreatMatrix />
